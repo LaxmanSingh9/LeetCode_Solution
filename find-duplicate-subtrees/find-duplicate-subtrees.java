@@ -22,7 +22,9 @@ class Solution {
         }
         String leftSubTree=serlizationofSubTrees(root.left,map,ans);
         String rightSubTree=serlizationofSubTrees(root.right,map,ans);
-        String serial=root.val+","+leftSubTree+rightSubTree;
+        StringBuilder sb = new StringBuilder();
+            sb.append(root.val).append(",").append(leftSubTree).append(",").append(rightSubTree);
+        String serial = sb.toString();
         map.put(serial,map.getOrDefault(serial,0)+1);
         if(map.get(serial)==2){ans.add(root);}
         return serial;
