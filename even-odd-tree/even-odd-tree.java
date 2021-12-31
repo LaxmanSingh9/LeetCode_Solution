@@ -24,14 +24,15 @@ class Solution {
        else if(ar.size()==level){
              ar.add(root.val);
         }
-        else if(level%2==0 && root.val<=ar.get(level)){
-            return false;
-        }
-        else if(level%2==1 && root.val>=ar.get(level)){
+    
+        else if((level%2==1 && root.val>=ar.get(level)) || (level%2==0 &&       root.val<=ar.get(level))){
             return false;
         }
         else{ar.set(level,root.val);}
-        return solution(root.left,level+1,ar)&&solution(root.right,level+1,ar);
+        boolean left=solution(root.left,level+1,ar);
+        if(left==false){return false;}
+        boolean right=solution(root.right,level+1,ar);
+        return left&&right;
         
         
     }
