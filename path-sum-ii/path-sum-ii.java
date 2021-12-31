@@ -27,18 +27,26 @@ class Solution {
              }
             return;
          }
-        if(root==null){
-            list.add(-1);
-            return;
-        }
+        
         list.add(root.val);
-        solution(root.left,list,ans,tv,val+root.val);
-        list.remove(list.size() - 1);
-        solution(root.right,list,ans,tv,val+root.val);
-        list.remove(list.size() - 1);
+        if(root.left!=null){
+            solution(root.left,list,ans,tv,val+root.val);
+             list.remove(list.size() - 1);
+        }
+        
+       
+        if(root.right!=null){
+            solution(root.right,list,ans,tv,val+root.val);
+            list.remove(list.size() - 1);
+        }
+        
+       
         
     }
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+         if(root==null){
+             return new ArrayList<>();
+         }
          List<List<Integer>>ans=new ArrayList<>();
          solution(root,new ArrayList(),ans,targetSum,0);
          return ans;
