@@ -8,12 +8,13 @@ class Solution {
         level--; // calculate the depth, 0 indexed, 0 is odd
         while(level != 0) {
             result.add(0, label);
-            int pos = label - (int) Math.pow(2, level); // calculate the position, 0 indexed
-            System.out.println(pos+" "+label+" "+level);
-            label = label - (pos + 1) - pos / 2;
-            level--;
+            int min=(int)Math.pow(2,level);
+            int max=(int)Math.pow(2,level+1)-1;
+            int pos=max-label;
+            pos=min+pos;
+            label=pos/2;
+            level-=1;
         }
         result.add(0, 1);
         return result;
-    }
-}
+    } }
