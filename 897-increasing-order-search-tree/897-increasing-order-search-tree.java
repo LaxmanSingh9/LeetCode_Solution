@@ -14,27 +14,23 @@
  * }
  */
 class Solution {
-    public void increasingBST1(TreeNode root,List<Integer>arr) {
+    TreeNode cur;
+    public void inorder(TreeNode root) {
         if(root==null){
             return ;
         }
-        increasingBST1(root.left,arr);
-        if(root!=null){
-            arr.add(root.val);
-        }
-        increasingBST1(root.right,arr);
+        inorder(root.left);
+        root.left=null;
+        cur.right=root;
+        cur=root;
+        inorder(root.right);
         
         
     }
     public TreeNode increasingBST(TreeNode root){
-       List<Integer>arr=new ArrayList<>();
-       increasingBST1(root,arr);
-       TreeNode node=new TreeNode(0);TreeNode ans=node;
-       for(int val:arr){
-            node.right=new TreeNode(val);
-            node=node.right;
-               
-       }
-       return ans.right; 
+       TreeNode answer =new TreeNode(0);
+       cur=answer;
+       inorder(root);
+       return answer.right; 
     }
 }
