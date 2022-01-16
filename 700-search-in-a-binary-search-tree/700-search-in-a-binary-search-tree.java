@@ -16,7 +16,7 @@
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
         if(root==null){
-            return null;
+            return root;
         }
         if(root.val==val){return root;}
         if(root.val>val){
@@ -25,10 +25,6 @@ class Solution {
         if(root.val<val){
             return searchBST(root.right,val);
         }
-        TreeNode left=searchBST(root.left,val);
-        if(left!=null){return left;};
-        TreeNode right=searchBST(root.right,val);
-        if(right!=null){return right;}
         return null;
         
     }
