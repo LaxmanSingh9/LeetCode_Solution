@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    Integer prev=-1000000;
+    int prev=-1000000;
     int min=Integer.MAX_VALUE;
     //InOrder Traversal Property, 
     public int getMinimumDifference(TreeNode root) {
