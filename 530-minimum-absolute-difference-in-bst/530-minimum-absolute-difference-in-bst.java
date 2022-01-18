@@ -14,24 +14,19 @@
  * }
  */
 class Solution {
-    public TreeSet<Integer>set=new TreeSet<>();
+    Integer prev=-1000000;
     int min=Integer.MAX_VALUE;
+    //InOrder Traversal Property, 
     public int getMinimumDifference(TreeNode root) {
         if(root==null){
-            return Integer.MAX_VALUE;
+            return min;
         }
-        if(set.isEmpty()==false){
-            if(set.floor(root.val)!=null){
-                min=Math.min(min,root.val-set.floor(root.val));
-            }
-            if(set.ceiling(root.val)!=null){
-                min=Math.min(min,set.ceiling(root.val)-root.val);
-            }
-        }
-        set.add(root.val);
         getMinimumDifference(root.left);
+        min=Math.min(min,root.val-prev);
+        prev=root.val;
         getMinimumDifference(root.right);
         return min;
+        
     }
 }
 
