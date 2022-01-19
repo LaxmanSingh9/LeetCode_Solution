@@ -21,8 +21,8 @@ class Solution {
         }
         
         bstToGst(root.right);
-        int curr=root.val;
-        root.val+=prev;prev+=curr;
+        prev+=root.val;
+        root.val=prev;
         bstToGst(root.left);
         return root;
         
