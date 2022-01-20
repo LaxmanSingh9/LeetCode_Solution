@@ -14,29 +14,18 @@
  * }
  */
 class Solution {
-    public TreeNode solution(int[]preorder,int[]inorder,Map<Integer,Integer>map,int s,int e,TreeNode  Index){
-        if(s>e){
-            return null;
-        }
-        int val=preorder[Index.val];
-        Index.val+=1;
-        int index=map.get(val);
-        TreeNode node=new TreeNode(val);
-        node.left=solution(preorder,inorder,map,s,index-1,Index);
-        node.right=solution(preorder,inorder,map,index+1,e,Index);
-        return node;
-    }
-    
-    public TreeNode bstFromPreorder(int[] preorder) {
-         int inorder[] = Arrays.copyOfRange(preorder, 0, preorder.length);
-        Arrays.sort(inorder);
-        Map<Integer,Integer>map=new HashMap<>();
-         for(int i=0;i<inorder.length;i+=1){
-             map.put(inorder[i],i);
-         }
-        TreeNode Index=new TreeNode(0);
+    public TreeNode insert(TreeNode root,int val){
+        if(root==null){return new TreeNode(val);}
+        else if(root.val>val){root.left=insert(root.left,val);}
+        else if(root.val<val){root.right=insert(root.right,val);}
+        return root;
         
-       // return null;
-       return solution(preorder,inorder,map,0,inorder.length-1,Index);
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode root=null;
+        for(int val:preorder){
+            root=insert(root,val);
+        }
+        return root;
     }
 }
