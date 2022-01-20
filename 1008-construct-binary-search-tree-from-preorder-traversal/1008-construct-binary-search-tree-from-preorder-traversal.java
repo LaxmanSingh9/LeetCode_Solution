@@ -14,22 +14,21 @@
  * }
  */
 class Solution {
-    
-    //Inserting in an BST(O(h))
-    public TreeNode insert(TreeNode root,int val){
-        if(root==null){return new TreeNode(val);}
-        else if(root.val>val){root.left=insert(root.left,val);}
-        else if(root.val<val){root.right=insert(root.right,val);}
-        return root;
-        
-    }
-    //Total TC=O(n*h)
-    public TreeNode bstFromPreorder(int[] preorder) {
-        TreeNode root=null;
-        //O(n)
-        for(int val:preorder){
-            root=insert(root,val);
+    public TreeNode solution(int[] preorder,int s,int e){
+        if(s>e){return null;}
+        int val=preorder[s];
+        TreeNode node=new TreeNode(val);
+        int i;
+        for(i=s;i<=e;i+=1){
+           if(preorder[i]>val){
+               break;
+           }
         }
-        return root;
+        node.left=solution(preorder,s+1,i-1);
+        node.right=solution(preorder,i,e);
+        return node;
+    }
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return solution(preorder,0,preorder.length-1);
     }
 }
