@@ -14,6 +14,8 @@
  * }
  */
 class Solution {
+    
+    //Inserting in an BST(O(h))
     public TreeNode insert(TreeNode root,int val){
         if(root==null){return new TreeNode(val);}
         else if(root.val>val){root.left=insert(root.left,val);}
@@ -21,8 +23,10 @@ class Solution {
         return root;
         
     }
+    //Total TC=O(n*h)
     public TreeNode bstFromPreorder(int[] preorder) {
         TreeNode root=null;
+        //O(n)
         for(int val:preorder){
             root=insert(root,val);
         }
