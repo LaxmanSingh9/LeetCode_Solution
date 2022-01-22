@@ -23,15 +23,9 @@ class Solution {
             else{root.right=null;root.left=trimBST(root.left,low,high);}
             return root;
         }    
-        if(root.left!=null){
-            root.left=trimBST(root.left,low,high);
-        }
-        
-        if(root.right!=null){
-            root.right=trimBST(root.right,low,high);
-
-        }
-        return root;
+       root.left=trimBST(root.left,low,high);
+       root.right=trimBST(root.right,low,high);
+       return root;
     
     }
 }
