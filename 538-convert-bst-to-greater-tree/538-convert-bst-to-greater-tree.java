@@ -15,6 +15,8 @@
  */
 class Solution {
     int prev=0;
+    //Reverse Inorder Traversal
+    //TC=O(n),since accessing every node once
     public TreeNode convertBST(TreeNode root) {
         if(root==null){
             return null;
