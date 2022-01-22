@@ -14,16 +14,24 @@
  * }
  */
 class Solution {
-    int index=0;int ans=-1;
     public int kthSmallest(TreeNode root, int k) {
-         if(root==null){
-             return ans;
-         }
-         kthSmallest(root.left,k);
-         if(ans!=-1){return ans;}
-         index+=1;
-         if(index==k){ans=root.val;return ans;}
-         kthSmallest(root.right,k);
-         return ans;
+        Stack<TreeNode>stack=new Stack<TreeNode>();
+        TreeNode buffer=root;int count=0;
+        int ans=-1;
+        while(buffer!=null || ans==-1|| !stack.isEmpty()){
+            if(buffer!=null){
+                stack.push(buffer);
+                buffer=buffer.left;
+            }
+            else{
+                 buffer=stack.pop();
+                if(++count==k){
+                    ans=buffer.val;
+                }
+                buffer=buffer.right;
+            }
+            
+        }
+        return ans;
     }
 }
