@@ -30,6 +30,7 @@ class Solution {
         inorderBST(root.right);                    
     }
     public void recoverTree(TreeNode root) {
+        System.out.println(Integer.MIN_VALUE);
         inorderBST(root);
         int buffer=firstEle.val;
         firstEle.val=secondEle.val;
