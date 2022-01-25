@@ -1,13 +1,27 @@
 class Solution {
-    boolean found;
-    public boolean validPath(int n, int[][] edges, int start, int end) {
-        found = false;
+    public boolean dfs(Map<Integer,List<Integer>>graph,int[] v,int s,int e){
+         if(s==e){
+             return true;
+         }
+         if(v[s]==1){
+             return false;
+         }
+         v[s]=1;
+         for(int node:graph.get(s)){
+            if(dfs(graph,v,node,e)){
+               return true;
+               
+            }
+             
+         }
+         return false;
+          
         
-        if(start == end)
-            return  true;
-
+    }
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+         
         Map<Integer,List<Integer>> graph = new HashMap();
-        boolean[] visited = new boolean[n];
+        int[] visited = new int[n];
         
         for(int i = 0 ; i < n ; i++){
             graph.put(i, new ArrayList());
@@ -18,24 +32,8 @@ class Solution {
            graph.get(edge[1]).add(edge[0]);
         }
 		//start dfs from start point
-        dfs(graph,visited,start,end);
+        return dfs(graph,visited,source,destination);
        
-        return found;
-    }
-    
-    private void dfs(Map<Integer,List<Integer>> graph,boolean[] visited, int start, int end){
-        if(visited[start] || found)
-            return;
         
-        visited[start] = true;
-        //when we found and neighbour which is equal to end point inside the recursion, voooleeey! break and return the true
-        for(int nei : graph.get(start)){
-            if(nei == end){
-                found = true;
-                break;
-            }
-            if(!visited[nei])
-                dfs(graph, visited, nei, end); //otherwise deep dig again!
-        }
     }
 }
