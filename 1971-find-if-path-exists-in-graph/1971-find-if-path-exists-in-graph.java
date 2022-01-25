@@ -1,20 +1,24 @@
 class Solution {
-    public boolean dfs(Map<Integer,List<Integer>>graph,int[] v,int s,int e){
-         if(s==e){
-             return true;
-         }
-         if(v[s]==1){
-             return false;
-         }
-         v[s]=1;
-         for(int node:graph.get(s)){
-            if(dfs(graph,v,node,e)){
-               return true;
-               
-            }
+    public boolean bfs(Map<Integer,List<Integer>>graph,int[] v,int s,int e){
+         Queue<Integer>queue=new LinkedList<>();
+         queue.add(s);
+         while(!queue.isEmpty()){
+             s=queue.poll();
+             if(s==e){
+                 return true;
+             }
+             v[s]=1;
+             for(int node:graph.get(s)){
+                 if(v[node]!=1){
+                     queue.add(node);
+                 }
+             }
+             
              
          }
          return false;
+        
+        
           
         
     }
@@ -31,8 +35,8 @@ class Solution {
            graph.get(edge[0]).add(edge[1]);
            graph.get(edge[1]).add(edge[0]);
         }
-		//start dfs from start point
-        return dfs(graph,visited,source,destination);
+		//start bfs from start point
+        return bfs(graph,visited,source,destination);
        
         
     }
