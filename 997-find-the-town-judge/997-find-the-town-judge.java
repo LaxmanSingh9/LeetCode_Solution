@@ -16,7 +16,6 @@ class Solution {
         }
         int ans=-1;
         for(Map.Entry<Integer,List<Integer>>m:map.entrySet()){
-            System.out.println(m.getValue().toString());
             if(m.getValue().size()==n-1){
                 if(ans!=-1){
                     return -1;
@@ -25,7 +24,6 @@ class Solution {
                 
             }
         }
-        System.out.println(ans);
         if(ans==-1){
             return -1;
         }
