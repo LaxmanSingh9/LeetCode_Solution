@@ -21,15 +21,13 @@ class Solution {
         }
          //construct graph, add bidirectional vertex
         for(int[] edge : edges){
-           if(graph.get(edge[0]-1)!=null && graph.get(edge[1]-1)!=null){
-              
-               boolean  check=dfs(graph,new int[n],edge[0]-1,edge[1]-1);
+           boolean  check=dfs(graph,new int[n],edge[0]-1,edge[1]-1);
                if(check==true){
                    return edge;
                }
                    
                
-           } 
+           
            graph.get(edge[0]-1).add(edge[1]-1);
            graph.get(edge[1]-1).add(edge[0]-1);
         }
