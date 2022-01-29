@@ -2,7 +2,7 @@ class Solution {
     public int dfs(Map<Integer,List<Integer>>graph,int[]visited,int s){
         visited[s]=1;
         int cost=0;
-        for(var edge:graph.get(s)){
+        for(int edge:graph.get(s)){
             if(visited[Math.abs(edge)]!=1){
                 cost+=dfs(graph,visited,Math.abs(edge))+(edge>0?1:0);
             }
