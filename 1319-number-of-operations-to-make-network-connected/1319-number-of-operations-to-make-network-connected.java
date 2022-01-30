@@ -1,20 +1,19 @@
 class Solution {
-    int vertices=0;
-    int edge=0;
+    
     public void dfs(Map<Integer,List<Integer>>graph,int []v,int s){
         v[s]=1;
-        vertices+=1;
         for(int e:graph.get(s)){
-           edge+=1;
-           if(v[e]!=1){
-                dfs(graph,v,e);
-            }
+           if(v[e]!=1) dfs(graph,v,e);
+            
         }
         
     }
     public int makeConnected(int n, int[][] edges) {
+        if(edges.length<n-1){
+            return -1;
+        }
         Map<Integer,List<Integer>> graph = new HashMap();
-       int[] visited = new int[n];
+        int[] visited = new int[n];
         
         for(int i = 0 ; i < n ; i++){
             graph.put(i, new ArrayList());
@@ -24,18 +23,14 @@ class Solution {
            graph.get(edge[0]).add(edge[1]);
            graph.get(edge[1]).add(edge[0]);
         }
-        int com=0;int extra=0;
+        int com=0;
 	    for(int i=0;i<n;i+=1){
             if(visited[i]!=1){
-                com+=1;edge=0;vertices=0;
-                dfs(graph,visited,i);
-                extra+=edge/2-(vertices-1);
+                dfs(graph,visited,i);    //count the componenets 
+                com+=1;
             }
         }
-        if(com-1<=extra){
-            return com-1;
-        }
-        return -1;
+        return com-1;
         
     }
 }
