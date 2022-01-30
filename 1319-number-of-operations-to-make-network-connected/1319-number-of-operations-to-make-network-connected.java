@@ -10,7 +10,7 @@ class Solution {
     }
     public int makeConnected(int n, int[][] edges) {
         if(edges.length<n-1){
-            return -1;
+            return -1;  //need atleast n-1 edges to connect all the vertices
         }
         Map<Integer,List<Integer>> graph = new HashMap();
         int[] visited = new int[n];
