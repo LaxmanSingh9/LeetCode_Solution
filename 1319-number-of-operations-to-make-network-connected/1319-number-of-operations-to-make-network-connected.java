@@ -4,7 +4,6 @@ class Solution {
     public void dfs(Map<Integer,List<Integer>>graph,int []v,int s){
         v[s]=1;
         vertices+=1;
-         
         for(int e:graph.get(s)){
            edge+=1;
            if(v[e]!=1){
@@ -29,9 +28,7 @@ class Solution {
 	    for(int i=0;i<n;i+=1){
             if(visited[i]!=1){
                 com+=1;edge=0;vertices=0;
-               //System.out.println(edge+" "+vertices);
                 dfs(graph,visited,i);
-               // System.out.println(edge+" "+vertices);
                 extra+=edge/2-(vertices-1);
             }
         }
