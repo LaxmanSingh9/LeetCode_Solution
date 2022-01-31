@@ -13,10 +13,8 @@ class Solution {
         }
         int ans=Integer.MIN_VALUE;
 		for(int i=0;i<n;i+=1){
-            for(int j=0;j<n;j+=1){
-                if(i==j){
-                    continue;
-                }
+            for(int j=i+1;j<n;j+=1){
+                
                 int totalEdgesBetVertices=graph.get(i).size()+graph.get(j).size();
                 if(graph.get(i).contains(j)){
                     totalEdgesBetVertices-=1;
