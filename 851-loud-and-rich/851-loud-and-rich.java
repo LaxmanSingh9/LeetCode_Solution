@@ -1,18 +1,20 @@
 class Solution {
-    public int dfs(Map<Integer,List<Integer>>graph,int s,int[]ans,int[]quiet){
+    public  int dfs(Map<Integer,List<Integer>>graph,int[]ans,int s,int[]quiet){
          if(ans[s]!=-1){
              return ans[s];
          }
-        else{
+         else{
            ans[s]=s;
-           for(int child:graph.get(s)){
-             int c=dfs(graph,child,ans,quiet);
-             if(quiet[c]<quiet[ans[s]]){
-                 ans[s]=ans[c];
-             }
-          }
-         return ans[s];
-        }
+           for(int edge:graph.get(s)){
+               if(quiet[ans[s]]>quiet[dfs(graph,ans,edge,quiet)]){
+                   ans[s]=ans[edge];
+                   
+               }
+               
+           }  
+           return ans[s];
+         }
+        
          
     }
     public int[] loudAndRich(int[][] edges, int[] quiet) {
@@ -28,14 +30,15 @@ class Solution {
            graph.get(edge[1]).add(edge[0]);
           
         }
-       
+      
         int []ans=new int[n];
-        Arrays.fill(ans, -1);
+        Arrays.fill(ans,-1);
         for(int i=0;i<n;i+=1){
-            dfs(graph,i,ans,quiet);
-          
+            dfs(graph,ans,i,quiet);
+         
         }
-        return ans;
+		return ans;
+       
         
        
     }
