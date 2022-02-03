@@ -9,9 +9,7 @@ class Solution {
             if(hasCycle(e,graph,v)==true){
                return true;
             }
-            else if(v[e]==1){
-                return true;
-            }
+         
         }
         v[s]=2;
         return false;
