@@ -9,15 +9,12 @@ class Solution {
            
 
            int []c=pq.remove();
-           int u=c[0];
-           if(vis[u]==1){
-               continue;
-           }
+           int u=c[0];int d1=c[1];
+           if(dist[u]<d1){continue;}
            if(dist[u]<=ds){
                cnt+=1;
            }
-           vis[u]=1;
-           //Syst
+          
            for(int e:graph.get(u)){
                
                if(dist[e]>dist[u]+mt[e][u]){
@@ -51,7 +48,7 @@ class Solution {
         int ans=0;
         for(int i=0;i<n;i+=1){
               int min_nodes=bfs(graph, distanceThreshold, i,n,mt);
-             
+               //System.out.println(min_nodes);
                if(min_nodes<=min){
                      ans=i;
                      min=min_nodes;
