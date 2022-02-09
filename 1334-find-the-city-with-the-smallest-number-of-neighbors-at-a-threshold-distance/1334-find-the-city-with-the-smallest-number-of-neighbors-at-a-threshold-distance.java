@@ -1,13 +1,9 @@
 class Solution {
     public int bfs(Map<Integer,List<Integer>>graph,int ds,int s,int n,int[][]mt){
          PriorityQueue<int[]>pq=new PriorityQueue<>((a, b) -> (a[1] - b[1]));
-         int []vis=new int[n];
          int []dist=new int[n];Arrays.fill(dist,100000);
-         dist[s]=0;int cnt=0;
-         pq.add(new int[]{s,0});
+         dist[s]=0;int cnt=0;pq.add(new int[]{s,0});
          while(!pq.isEmpty()){
-           
-
            int []c=pq.remove();
            int u=c[0];int d1=c[1];
            if(dist[u]<d1){continue;}
