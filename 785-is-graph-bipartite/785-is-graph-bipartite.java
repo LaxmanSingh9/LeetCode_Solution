@@ -5,7 +5,7 @@ class Solution {
         }
         vis[s]=col;
         for(int e:graph[s]){
-          boolean check=dfs(graph,vis,col==0?1:0,e);
+          boolean check=dfs(graph,vis,col^1,e);
           if(check==false){
                 return false;
             }
