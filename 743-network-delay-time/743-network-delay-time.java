@@ -1,40 +1,58 @@
 class Solution {
-   public int bfs(Map<Integer,List<Integer>>graph,int n,int s,int []dist,int[][]mt){
-         PriorityQueue<int[]>pq=new PriorityQueue<>((a, b) -> (a[1] - b[1]));
-         dist[s]=0;int cnt=0;pq.add(new int[]{s,0});
-         int ans=0;
-         while(!pq.isEmpty()){
-           int []c=pq.remove();
-           int u=c[0];int d1=c[1];
-           if(dist[u]<d1){continue;}
-           ans=dist[u];n-=1;
-           for(int e:graph.get(u)){
-               
-               if(dist[e]>dist[u]+mt[u][e]){
-                   dist[e]=dist[u]+mt[u][e];
-                   pq.add(new int[]{e,dist[e]});
-               }
-         }
-      }
-      return n== 0 ? ans : -1;
+    // Adjacency list
+    Map<Integer, List<Pair<Integer, Integer>>> adj = new HashMap<>();
 
-  }
-    public int networkDelayTime(int[][] edges, int n, int k) {
-        
-        Map<Integer,List<Integer>> graph = new HashMap();
-        int[] dist= new int[n];
-        Arrays.fill(dist,Integer.MAX_VALUE);
-        int [][]edgeWeight=new int[n][n];
-        for(int i = 0 ; i < n ; i++){
-            graph.put(i, new ArrayList());
+    private void DFS(int[] signalReceivedAt, int currNode, int currTime) {
+        // If the current time is greater than or equal to the fastest signal received
+        // Then no need to iterate over adjacent nodes
+        if (currTime >= signalReceivedAt[currNode]) {
+            return;
         }
-         //construct graph, add bidirectional vertex
-        for(int[] edge : edges){
-           graph.get(edge[0]-1).add(edge[1]-1);
-           edgeWeight[edge[0]-1][edge[1]-1]=edge[2];
+
+        // Fastest signal time for currNode so far
+        signalReceivedAt[currNode] = currTime;
+        
+        if (!adj.containsKey(currNode)) {
+            return;
         }
-        return bfs(graph,n,k-1,dist,edgeWeight);
         
+        // Broadcast the signal to adjacent nodes
+        for (Pair<Integer, Integer> edge : adj.get(currNode)) {
+            int travelTime = edge.getKey();
+            int neighborNode = edge.getValue();
+            
+            // currTime + time : time when signal reaches neighborNode
+            DFS(signalReceivedAt, neighborNode, currTime + travelTime);
+        }
+    }
+    
+    public int networkDelayTime(int[][] times, int n, int k) {
+        // Build the adjacency list
+        for (int[] time : times) {
+            int source = time[0];
+            int dest = time[1];
+            int travelTime = time[2];
+            
+            adj.putIfAbsent(source, new ArrayList<>());
+            adj.get(source).add(new Pair(travelTime, dest));
+        }
         
+        // Sort the edges connecting to every node
+        for (int node : adj.keySet()) {
+            Collections.sort(adj.get(node), (a, b) -> a.getKey() - b.getKey());
+        }
+        
+        int[] signalReceivedAt = new int[n + 1];
+        Arrays.fill(signalReceivedAt, Integer.MAX_VALUE);
+        
+        DFS(signalReceivedAt, k, 0);
+        
+        int answer = Integer.MIN_VALUE;
+        for (int node = 1; node <= n; node++) {
+            answer = Math.max(answer, signalReceivedAt[node]);
+        }
+        
+        // Integer.MAX_VALUE signifies atleat one node is unreachable
+        return answer == Integer.MAX_VALUE ? -1 : answer;
     }
 }
