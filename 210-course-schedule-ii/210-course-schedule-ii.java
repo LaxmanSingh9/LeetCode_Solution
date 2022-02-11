@@ -7,8 +7,8 @@ class Solution {
         }
         int []inDeg=new int[n];
         for(int edges[]:prerequisites){
-            graph.get(edges[1]).add(edges[0]);
-            inDeg[edges[0]]+=1;
+            graph.get(edges[0]).add(edges[1]);
+            inDeg[edges[1]]+=1;
         }
         
         //Topologival Sort
@@ -19,7 +19,7 @@ class Solution {
                q.add(i);
         }
  
-        List<Integer>list=new ArrayList<>();
+        Stack<Integer>list=new Stack<>();
         while(q.isEmpty()==false){
             int v=q.poll();
             list.add(v);
@@ -32,8 +32,10 @@ class Solution {
             }
         }
         int[] ans=new int[list.size()];
-        for(int i=0;i<list.size();i+=1){
-            ans[i]=list.get(i).intValue();
+        int idx=0;
+        while(list.isEmpty()==false){
+            ans[idx]=list.pop();
+            idx+=1;
         }
         return n==0?ans:new int[0];
         
