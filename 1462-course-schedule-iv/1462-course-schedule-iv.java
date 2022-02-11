@@ -1,16 +1,20 @@
 class Solution {
     //dfs to check query validation
-    public boolean checkDependcies(List<List<Integer>>lookUpArray,int d,int dep){
-         if(lookUpArray.get(d).contains(dep)){
-             return true;
-         }
-         for(int e:lookUpArray.get(d)){
-             if(checkDependcies(lookUpArray,e,dep)){
-                 return true;
-             }
-             
-         }
-         return false;
+    public List<Boolean> checkDependcies(int[][]queries,Map<Integer,Set<Integer>>prerequisitesMap){
+        int qlen=queries.length;List<Boolean>ans=new ArrayList<>();
+        
+        for(int i=0;i<qlen;i+=1){
+            int d=queries[i][0];int dep=queries[i][1];
+            Set<Integer> set = prerequisitesMap.get(dep);
+            if(set.contains(d)){
+                ans.add(true);
+            }
+            else{
+                ans.add(false);
+            }
+            
+        }
+        return ans;
         
     }
     public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries) {
@@ -34,10 +38,6 @@ class Solution {
             if(inDeg[i]==0)
                q.add(i);
         }
-        List<List<Integer>>lookUpArray=new ArrayList<>();
-        for(int i=0;i<n;i+=1){
-            lookUpArray.add(new ArrayList<>());
-        }
         while(q.isEmpty()==false){
             int v=q.poll();
            // System.out.println(v);
@@ -49,22 +49,10 @@ class Solution {
             }
         }
         //Topological Sort End
-        
-        //Logic To Check Query Validation
+        return checkDependcies(queries,prerequisitesMap);
+      
        
-        int qlen=queries.length;List<Boolean>ans=new ArrayList<>();
-        for(int i=0;i<qlen;i+=1){
-            int d=queries[i][0];int dep=queries[i][1];
-            Set<Integer> set = prerequisitesMap.get(dep);
-            if(set.contains(d)){
-                ans.add(true);
-            }
-            else{
-                ans.add(false);
-            }
-            
-        }
-        return ans;
+        
         
         
         
