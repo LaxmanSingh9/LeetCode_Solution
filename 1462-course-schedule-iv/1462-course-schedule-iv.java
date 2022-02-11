@@ -46,11 +46,7 @@ class Solution {
        
         int qlen=queries.length;List<Boolean>ans=new ArrayList<>();
         for(int i=0;i<qlen;i+=1){
-            if(checkDependcies(lookUpArray,queries[i][0],queries[i][1])){
-                ans.add(true);}
-            else{
-                ans.add(false);}
-            
+            ans.add(checkDependcies(lookUpArray,queries[i][0],queries[i][1])?true:false);
         }
         return ans;
         
