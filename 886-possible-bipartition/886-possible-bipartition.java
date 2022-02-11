@@ -1,36 +1,25 @@
 class Solution {
-    public boolean dfs(Map<Integer,List<Integer>>graph,int s,int[]vis,int col){
-        if(vis[s]!=-1)
-            return vis[s]==col;
-        vis[s]=col;
-        for(int e:graph.get(s)){
-            if(dfs(graph,e,vis,col^1)==false)
-              return false;
-        }
-    
-        return true;
-    
-    
-    }
-    
-    
-    public boolean possibleBipartition(int n, int[][] dislikes) {
-        Map<Integer,List<Integer>> graph = new HashMap();
-        for(int i = 0 ; i < n ; i++){
-            graph.put(i, new ArrayList());
-        }
-        for(int edges[]:dislikes){
-            graph.get(edges[0]-1).add(edges[1]-1);
-            graph.get(edges[1]-1).add(edges[0]-1);
-        }
-        int []vis=new int[n];Arrays.fill(vis,-1);
-        for(int i=0;i<n;i+=1){
-            if(vis[i]==-1 && dfs(graph,i,vis,0)==false)
-                return false;
+    public boolean possibleBipartition(int N, int[][] dislikes) {
+        int[] colors = new int[N + 1];
+        for(int i = 1; i <= N; ++i) colors[i] = i;
+        for(int i = 0; i < dislikes.length; ++i) {
+            int p1 = dislikes[i][0], p2 = dislikes[i][1];
+            if(colors[p2] == p2) colors[p2] = p1;
+            else {
+                int[] uf1 = find(p1, colors), uf2 = find(p2, colors);
+                if(uf1[0] == uf2[0] && uf1[1] == uf2[1]) return false;
+            }
         }
         return true;
-    
-    
-    
     }
+    
+    private int[] find(int p, int[] colors) {
+        int color = 0;
+        while(colors[p] != p) {
+            p = colors[p];
+            color = color == 0 ? 1 : 0;
+        }
+        return new int[] {p, color};
+    }
+    
 }
