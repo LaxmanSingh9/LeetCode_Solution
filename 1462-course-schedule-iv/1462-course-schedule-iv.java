@@ -2,7 +2,6 @@ class Solution {
     //dfs to check query validation
     public List<Boolean> checkDependcies(int[][]queries,Map<Integer,Set<Integer>>prerequisitesMap){
         int qlen=queries.length;List<Boolean>ans=new ArrayList<>();
-        
         for(int i=0;i<qlen;i+=1){
             int d=queries[i][0];int dep=queries[i][1];
             Set<Integer> set = prerequisitesMap.get(dep);
