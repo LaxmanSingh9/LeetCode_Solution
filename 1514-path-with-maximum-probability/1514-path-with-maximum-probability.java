@@ -23,15 +23,15 @@ class Solution {
   }
     public double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
         Map<Integer,List<Integer>> graph = new HashMap();
+        List<Map<Integer,Double>>mt=new ArrayList<>();
         int[] visited = new int[n];
         
         for(int i = 0 ; i < n ; i++){
             graph.put(i, new ArrayList());
-        }
-        List<Map<Integer,Double>>mt=new ArrayList<>();
-        for(int i=0;i<n;i+=1){
             mt.add(new HashMap<>());
         }
+       
+       
          //construct graph, add bidirectional vertex
         int i=0;
         for(int[] edge : edges){
