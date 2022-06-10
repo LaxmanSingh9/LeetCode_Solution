@@ -1,7 +1,7 @@
 class Solution {
  
     public int solve(String s,String t,int i,int j,int[][]memo){
-       if(i>=s.length() || j>=t.length()){
+       if(i==-1 || j==-1){
             return 0;
         }
         if(memo[i][j]!=-1){
@@ -9,12 +9,12 @@ class Solution {
         }
         int val;
         if(s.charAt(i)==t.charAt(j)){
-            val=1+solve(s,t,i+1,j+1,memo);
+            val=1+solve(s,t,i-1,j-1,memo);
         
         }
         else{
-            int ans1=solve(s,t,i+1,j,memo);
-            int ans2=solve(s,t,i,j+1,memo);
+            int ans1=solve(s,t,i-1,j,memo);
+            int ans2=solve(s,t,i,j-1,memo);
             val=Math.max(ans1,ans2);
         }
         memo[i][j]=val;
@@ -36,7 +36,7 @@ class Solution {
         }
         int val=solve(s,t,0,0,memo);
         System.out.println(val);
-        return solve(s,t,0,0,memo)==Math.min(m,n);
+        return solve(s,t,n-1,m-1,memo)==Math.min(m,n);
         
     }
     
