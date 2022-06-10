@@ -35,7 +35,6 @@ class Solution {
             Arrays.fill(ar,-1);
         }
         int val=solve(s,t,0,0,memo);
-        System.out.println(val);
         return solve(s,t,n-1,m-1,memo)==n;
         
     }
