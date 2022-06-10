@@ -14,9 +14,10 @@ class Solution {
         return smallAns;
     }
     public int climbStairs(int n) {
-        int memo[]=new int[n+1];
-        Arrays.fill(memo,-1);
-        return solve(n,memo);
+        int a = 1, b = 1;
+    while (n-- > 0)
+        a = (b += a) - a;
+    return a;
         
     }
 }
