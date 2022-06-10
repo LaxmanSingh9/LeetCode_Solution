@@ -1,27 +1,42 @@
 class Solution {
     
-//     public int solve(int[]prices,int type,int index){
-//         if(index<=-1){
-//             return 0;
-//         }
-//        int ans1=solve(prices,1,index+1)+prices[index];
-//        int ans2=solve(prices,0,index+1)-prices[index]
+    public int solve(int[]prices,int buy,int trans,int[][]memo,int index){
+        if(index>=prices.length || trans<=0){
+            return 0;
+        }
+        if(memo[index][buy]!=-1){
+            return memo[index][buy];
+        }
+        if(buy==1){
+            int ans1=-prices[index]+solve(prices,buy^1,trans,memo,index+1);
+            int ans2=solve(prices,buy,trans,memo,index+1);
+            memo[index][buy]=Math.max(ans1,ans2);
+            return memo[index][buy];
+        }
+        else{
+            int ans1=prices[index]+solve(prices,buy^1,trans-1,memo,index+1);
+            int ans2=solve(prices,buy,trans,memo,index+1);
+            memo[index][buy]=Math.max(ans1,ans2);
+            return memo[index][buy];
+            
+        }
+       
       
+
         
-        
-//     }
+    }
+    
+    
+    
+    
     
     public int maxProfit(int[] prices) {
-        int sell=Integer.MAX_VALUE;
-        int profit=0;
-        for(int i=0;i<prices.length;i+=1){
-            if(sell<prices[i]){
-                profit=Math.max(profit,prices[i]-sell);
-            }
-            else{
-                sell=prices[i];
-            }
+        int n=prices.length;
+        int [][]memo=new int[n][2];
+        for(int[] ar:memo){
+            Arrays.fill(ar,-1);
         }
-        return profit;
-    }
+        return solve(prices,1,1,memo,0);
+        
+    } 
 }
