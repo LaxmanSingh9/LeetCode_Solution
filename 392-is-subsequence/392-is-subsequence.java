@@ -24,11 +24,11 @@ class Solution {
     
     public boolean isSubsequence(String s, String t) {
         int n=s.length();int m=t.length();
-        if(n==0){
+        if(m==0 && n==0){
             return true;
         }
-        if(m==0){
-            return false;
+        if(m==0 ||n==0){
+            return m==0?false:true;
         }
         int [][]memo=new int[n][m];
         for(int ar[]:memo){
