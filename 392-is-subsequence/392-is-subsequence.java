@@ -36,7 +36,7 @@ class Solution {
         }
         int val=solve(s,t,0,0,memo);
         System.out.println(val);
-        return solve(s,t,n-1,m-1,memo)==Math.min(m,n);
+        return solve(s,t,n-1,m-1,memo)==n;
         
     }
     
