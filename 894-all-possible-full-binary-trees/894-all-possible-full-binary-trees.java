@@ -20,7 +20,7 @@ class Solution {
         if(N<=0 || N%2==0){
             return res;
         }
-        if(map.containsKey(N)){
+        if(map.get(N)!=null){
             return map.get(N);
         }
         if(N==1){
