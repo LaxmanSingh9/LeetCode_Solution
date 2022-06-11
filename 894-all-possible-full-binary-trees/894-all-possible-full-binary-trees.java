@@ -24,7 +24,7 @@ class Solution {
             return res;
         }
         N=N-1;
-        for(int i=1; i<=N;i+=1){
+        for(int i=1; i<=N;i+=2){
             List<TreeNode> left = allPossibleFBT(i);
             List<TreeNode> right = allPossibleFBT(N-i);
             for(TreeNode nl: left){
