@@ -14,8 +14,8 @@
  * }
  */
 class Solution {
-    public Map<Integer,List<TreeNode>>map=new HashMap<>();
-    public List<TreeNode> allPossibleFBT(int N) {
+    
+    public List<TreeNode> allPossibleFBTs(int N,Map<Integer,List<TreeNode>>map) {
         List<TreeNode> res = new ArrayList<>();
         if(N<=0 || N%2==0){
             return res;
@@ -29,8 +29,8 @@ class Solution {
         }
         N=N-1;
         for(int i=1; i<=N;i+=2){
-            List<TreeNode> left = allPossibleFBT(i);
-            List<TreeNode> right = allPossibleFBT(N-i);
+            List<TreeNode> left = allPossibleFBTs(i,map);
+            List<TreeNode> right = allPossibleFBTs(N-i,map);
             for(TreeNode nl: left){
                 for(TreeNode nr:right){
                     TreeNode cur = new TreeNode(0);
@@ -43,4 +43,12 @@ class Solution {
         map.put(N+1,res);
         return res;
     }
+    public List<TreeNode> allPossibleFBT(int N){
+      Map<Integer,List<TreeNode>>map=new HashMap<>();
+        return allPossibleFBTs(N,map);
+        
+        
+        
+    }
+    
 }
