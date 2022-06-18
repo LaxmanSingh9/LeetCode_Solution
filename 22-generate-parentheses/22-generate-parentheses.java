@@ -12,10 +12,11 @@ class Solution {
        return stack.empty();
     }
     public List<String> ans=new ArrayList<>();
+    public Map<String,Integer>map=new HashMap<>();
      public void solve(int n,int type1,int type2,String s){
         if(type1==0&&type2==0){
-            if(isValidParthesis(s) && !ans.contains(s)){
-                ans.add(s);
+            if(isValidParthesis(s) && !map.containsKey(s)){
+                ans.add(s);map.put(s,1);
             }
             return ;
         }
