@@ -10,22 +10,38 @@ class Solution {
         int currMax=0;
         for(int j=0;j<k;j+=1){
            int to=j+index;
-           if(to>=arr.length){
-               break;
-           }
-           currMax=Math.max(currMax,arr[to]);
-           int leftMaxx=currMax*(j+1);
-           int rightMaxx=solve(arr,k,to+1,memo);
-           ans=Math.max(ans,leftMaxx+rightMaxx);
+           
          }
        memo[index]=ans;
        return ans;
         
         
     }
+    public int get(int[]dp,int index){
+        if(index<=-1){
+            return 0;
+        }
+        return dp[index];
+    }
     public int maxSumAfterPartitioning(int[] arr, int k) {
-        int []memo=new int[arr.length];
-        Arrays.fill(memo,-1);
-        return  solve(arr,k,0,memo);
+        int n=arr.length;
+        int []memo=new int[n];
+        int ans=0,from=0,curMax=0;
+        Arrays.fill(memo,0);
+        for(int i=0;i<n;i+=1){
+           curMax=0;
+           for(int j=0;j<k;j+=1){
+              from=i-j;
+              if(from<0){
+                  continue;
+              }
+              curMax=Math.max(arr[from],curMax);
+              ans=curMax*(j+1)+get(memo,from-1);
+              memo[i]=Math.max(ans,memo[i]);
+         } 
+        
+        }
+        
+        return memo[n-1];
     }
 }
