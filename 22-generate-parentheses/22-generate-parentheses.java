@@ -13,24 +13,24 @@ class Solution {
     }
     public List<String> ans=new ArrayList<>();
     public Map<String,Integer>map=new HashMap<>();
-     public void solve(int n,int type1,int type2,String s){
-        if(type1==0&&type2==0){
+     public void solve(int n,int open,int close,String s){
+        if(open==n&&close==n){
             if(isValidParthesis(s) && !map.containsKey(s)){
                 ans.add(s);map.put(s,1);
             }
             return ;
         }
-        int ans=0;
-        if(type1>0){
-            solve(n,type1-1,type2,s+"(");
+        
+        if(open<n){
+            solve(n,open+1,close,s+"(");
         }
-        if(type2>0){
-            solve(n,type1,type2-1,s+")");
+        if(close<open){
+            solve(n,open,close+1,s+")");
         }
        
     }
     public List<String> generateParenthesis(int n) {
-         solve(n,n,n,"");
+         solve(n,0,0,"");
          return ans;
     }
 }
