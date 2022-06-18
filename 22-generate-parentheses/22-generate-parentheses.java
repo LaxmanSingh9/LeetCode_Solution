@@ -9,14 +9,11 @@ class Solution {
                 stack.push( string.charAt(i));
           }
        }
-       
-        return stack.empty();
-        
-        
+       return stack.empty();
     }
     public List<String> ans=new ArrayList<>();
      public void solve(int n,int type1,int type2,String s){
-        if(s.length()==2*n){
+        if(type1==0&&type2==0){
             if(isValidParthesis(s) && !ans.contains(s)){
                 ans.add(s);
             }
