@@ -8,9 +8,8 @@ class Solution {
                 prev=arr[j];
                 j+=1;
              }
-             j-=1;
              if(j-i+1>=3){
-                 ans+=j-i-1;
+                 ans+=j-i-2;
              }
                
          } 
