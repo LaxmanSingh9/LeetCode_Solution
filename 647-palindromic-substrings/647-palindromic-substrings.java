@@ -1,7 +1,7 @@
 import java.util.*;
 class Solution {
      public int solve(int l,int r,char[] s,int [][]memo){
-        if(l==r ||r<l){// if lenght is 1
+        if(r<l){// if lenght is 1
             return 1;
         }
         if(memo[l][r]!=-1){
@@ -32,6 +32,6 @@ class Solution {
             
         }
         System.out.println(memo[1][1]);
-        return ans+n;
+        return ans;
     }
 }
