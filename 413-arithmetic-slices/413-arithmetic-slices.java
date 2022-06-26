@@ -2,12 +2,9 @@ class Solution {
     public int numberOfArithmeticSlices(int[] arr) {
         int n=arr.length;
         int ans=0;
-         for(int i=0;i<n;i+=1){
-             int prev=arr[i],j=i+1,diff=Integer.MIN_VALUE;
-             while(j<n && (diff==Integer.MIN_VALUE ||((arr[j]-prev)==diff))){
-                if(diff==Integer.MIN_VALUE){
-                    diff=arr[j]-arr[i];
-                }
+         for(int i=0;i<n-1;i+=1){
+             int prev=arr[i],diff=arr[i+1]-arr[i];prev=arr[i];int j=i+1;
+             while(j<n && arr[j]-prev==diff){
                 prev=arr[j];
                 j+=1;
              }
