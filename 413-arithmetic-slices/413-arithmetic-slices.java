@@ -1,19 +1,20 @@
 class Solution {
+    public int solve(int n,int[]arr,int prev){
+        if(n<3){
+            return 0;
+        }
+        if(arr[n-1]+arr[n-3]==2*arr[n-2]){
+            prev+=1;
+            return prev+solve(n-1,arr,prev);
+        }
+        else{
+            return solve(n-1,arr,0);
+        }
+        
+    }
     public int numberOfArithmeticSlices(int[] arr) {
         int n=arr.length;
-        int dp[]=new int[n];
-        int prev=0,ans=0;
-         for(int i=1;i<n-1;i+=1){
-             if(arr[i]-arr[i-1]==arr[i+1]-arr[i]){
-                 ans+=(prev+1);
-                 prev+=1;;
-              }
-              else{
-                  prev=0;
-              }
-             
-        }
-        return ans;
+        return solve(n,arr,0);
     }
 
 }
