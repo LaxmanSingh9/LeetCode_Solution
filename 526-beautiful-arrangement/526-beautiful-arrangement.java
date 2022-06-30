@@ -1,15 +1,14 @@
 class Solution {
-    public void permute(boolean []freq,List<List<Integer>>ans,List<Integer>permArr,int len){
-        if(permArr.size()==freq.length){
-            ans.add(permArr);
-            return ;
+    int ans=0;
+    public void permute(boolean []freq,int len){
+        if(len>freq.length){
+            ans+=1;
+            return;
         }
         for(int i=1;i<=freq.length;i+=1){
            if(!freq[i-1] && (i%len==0|| len%i==0)){
-              permArr.add(i);
               freq[i-1]=true;len+=1;
-              permute(freq,ans,permArr,len);
-              permArr.remove(permArr.size()-1);
+              permute(freq,len);
               freq[i-1]=false;
               len-=1;
                 
@@ -21,8 +20,7 @@ class Solution {
     }
     public int countArrangement(int n) {
        boolean freq[]=new boolean[n];
-       List<List<Integer>>ans=new ArrayList<>();
-       permute(freq,ans,new ArrayList<>(),1);
-       return ans.size();
+       permute(freq,1);
+       return ans;
     }
 }
