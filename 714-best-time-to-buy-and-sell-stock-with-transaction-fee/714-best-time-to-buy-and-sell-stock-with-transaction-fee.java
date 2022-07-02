@@ -1,27 +1,12 @@
 class Solution {
-    public int solve(int []prices,int buy,int i,int fee,int[][]memo){
-         if(i==prices.length || memo[i][buy]!=-1){
-             return i==prices.length?0:memo[i][buy];
-         }
-         int a=0,b=0;
-         if(buy==1){
-             a=solve(prices,buy^1,i+1,fee,memo)-prices[i];
-             b=solve(prices,buy,i+1,fee,memo);
-         }
-         else{
-             a=solve(prices,buy^1,i+1,fee,memo)+prices[i]-fee;
-             b=solve(prices,buy,i+1,fee,memo);
-            
-         }
-         memo[i][buy]=Math.max(a,b);
-         return memo[i][buy];
-    }
-    public int maxProfit(int[] prices, int fee) {
-        int[][]memo=new int[prices.length+1][2];
-        for(int []ar:memo){
-            Arrays.fill(ar,-1);
+     public int maxProfit(int[] prices, int fee) {
+        if (prices.length <= 1) return 0;
+        int days = prices.length, buy[] = new int[days], sell[] = new int[days];
+        buy[0]=-prices[0];
+        for (int i = 1; i<days; i++) {
+            buy[i] = Math.max(buy[i - 1], sell[i - 1] - prices[i]); // keep the same as day i-1, or buy from sell status at day i-1
+            sell[i] = Math.max(sell[i - 1], buy[i - 1] + prices[i] - fee); // keep the same as day i-1, or sell from buy status at day i-1
         }
-        return solve(prices,1,0,fee,memo);
-        
+        return sell[days - 1];
     }
 }
