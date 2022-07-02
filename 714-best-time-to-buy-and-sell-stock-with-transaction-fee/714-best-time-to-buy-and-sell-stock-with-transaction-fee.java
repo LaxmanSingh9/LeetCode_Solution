@@ -7,7 +7,7 @@ class Solution {
             sell[i]=Math.max(sell[i-1],buy[i-1]+prices[i]-fee);
             
         }
-        return sell[n-1];
+        return Math.max(sell[n-1],buy[n-1]);
         
     }
 }
