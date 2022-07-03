@@ -8,7 +8,7 @@ class Solution {
            prevSell=Math.max(prevSell,prevBuy+prices[i]);
             
         }
-        return Math.max(prevSell,prevBuy);
+        return prevSell;
         
     }
 }
