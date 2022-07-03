@@ -10,7 +10,7 @@ class Solution {
         if(map.containsKey(s)){
             return map.get(s);
         }
-        List<Integer>res=new ArrayList<>();
+        List<Integer>res=new LinkedList<>();
         for(int i=0;i<s.length();i+=1){
             char ch=s.charAt(i);
             if(ch=='*' || ch=='-' || ch=='+'){
