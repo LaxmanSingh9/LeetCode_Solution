@@ -18,19 +18,22 @@ class Solution {
         Collections.sort(freq, Collections.reverseOrder());
         n=freq.size();
         List<Integer>freq2=new LinkedList<>();
+        int currFreq=0,prevFreq=0;
         for(int i=0;i<n;i+=1){
-            int currFreq=freq.get(i);
+            currFreq=freq.get(i);
             if(freq2.contains(freq.get(i))){
                 if(freq2.contains(1)){
                    for(int j=i;j<n;j+=1)ans+=freq.get(j);
                    break;
                 }
                 else{
-                   currFreq=freq2.get(freq2.size()-1)-1;
+                   currFreq=prevFreq-1;
                    ans+=freq.get(i)-currFreq;
                 }
             }
             freq2.add(currFreq);
+            prevFreq=currFreq;
+            
         } 
         return ans;
         
