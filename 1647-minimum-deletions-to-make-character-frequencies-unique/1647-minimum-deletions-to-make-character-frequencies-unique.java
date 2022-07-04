@@ -7,13 +7,12 @@ class Solution {
             freq[s.charAt(i) - 'a'] += 1;
         }
         Arrays.sort(freq);
-        List<Integer>freq2=new ArrayList<>();
-       // System.out.println(Arrays.toString(freq));
+        Map<Integer,Integer>map=new HashMap<>();
         int currFreq=0,prevFreq=0;
         for(int i=25;i>=0&&freq[i]!=0;i-=1){
             currFreq=freq[i];
-            if(freq2.contains(freq[i])){
-                if(freq2.contains(1)){
+            if(map.containsKey(freq[i])){
+                if(map.containsKey(1)){
                    for(int j=i;j>=0;j-=1)ans+=freq[j];
                    break;
                 }
@@ -22,7 +21,7 @@ class Solution {
                    ans+=freq[i]-currFreq;
                 }
             }
-            freq2.add(currFreq);
+            map.put(currFreq,1);
             prevFreq=currFreq;
             
         } 
