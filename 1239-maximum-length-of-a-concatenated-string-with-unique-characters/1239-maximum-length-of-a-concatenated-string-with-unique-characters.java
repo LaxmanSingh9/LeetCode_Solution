@@ -8,20 +8,17 @@ class Solution {
         }
         return s.length();
     }
-    public Map<String,Integer>map=new HashMap<>();
+    public Map<Integer,Integer>map=new HashMap<>();
     public int solve(List<String> arr,int i ,String s){
         if(i==arr.size()){   
-            
-          return isValidConcat(s);
+            return isValidConcat(s);
         }
-        if(map.containsKey(s))
-            return map.get(s);
-        map.put(s,Math.max(solve(arr,i+1,s+arr.get(i)),solve(arr,i+1,s)));
-        return map.get(s);
-        
+        if(s!="" && isValidConcat(s)==0){
+            return 0;
+        }
+        return Math.max(solve(arr,i+1,s+arr.get(i)),solve(arr,i+1,s));
     }
     public int maxLength(List<String> arr) {
-        
         return solve(arr,0,"");
     }
 }
