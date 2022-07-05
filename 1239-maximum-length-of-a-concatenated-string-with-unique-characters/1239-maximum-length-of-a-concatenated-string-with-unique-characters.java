@@ -9,12 +9,13 @@ class Solution {
         return s.length();
     }
     public int solve(List<String> arr,int i ,String s){
-        if(i==arr.size()){   
-            return isValidConcat(s);
-        }
         if(s!="" && isValidConcat(s)==0){
             return 0;
         }
+        if(i==arr.size()){   
+            return s.length();
+        }
+        
         return Math.max(solve(arr,i+1,s+arr.get(i)),solve(arr,i+1,s));
     }
     public int maxLength(List<String> arr) {
