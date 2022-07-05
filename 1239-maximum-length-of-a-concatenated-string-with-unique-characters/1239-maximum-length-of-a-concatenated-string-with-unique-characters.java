@@ -8,7 +8,6 @@ class Solution {
         }
         return s.length();
     }
-    public Map<Integer,Integer>map=new HashMap<>();
     public int solve(List<String> arr,int i ,String s){
         if(i==arr.size()){   
             return isValidConcat(s);
