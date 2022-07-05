@@ -1,15 +1,15 @@
 class Solution {
-    public int isValidConcat(String s){
+    public boolean isValidConcat(String s){
         int []freq=new int[26];
         for(int i=0;i<s.length();i+=1){
             freq[s.charAt(i)-'a']+=1;
             if(freq[s.charAt(i)-'a']>1)
-             return 0;
+             return false;
         }
-        return s.length();
+        return true;
     }
     public int solve(List<String> arr,int i ,String s){
-        if(s!="" && isValidConcat(s)==0){
+        if(s!="" && !isValidConcat(s)){
             return 0;
         }
         if(i==arr.size()){   
