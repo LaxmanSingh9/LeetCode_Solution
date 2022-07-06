@@ -10,6 +10,11 @@ class Solution {
         if(map.containsKey(s)){
             return map.get(s);
         }
+        if(s.length()==1){
+            List<Integer>ar=new ArrayList<>();
+            ar.add(Integer.valueOf(s));
+            return ar;
+        }
         List<Integer>res=new ArrayList<>();
         for(int i=0;i<s.length();i+=1){
             char ch=s.charAt(i);
