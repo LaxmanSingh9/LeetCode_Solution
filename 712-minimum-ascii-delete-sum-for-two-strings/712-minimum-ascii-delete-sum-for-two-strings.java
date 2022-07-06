@@ -5,6 +5,7 @@ class Solution {
              asciiSum+=(int)s.charAt(i);
         return asciiSum;
     }
+    int totalAsciiSum;
     public int allCommonSub(String s1,String s2,int i,int j,int[][]memo){
        if(i==s1.length() || j==s2.length()){
           return 0;
@@ -24,8 +25,8 @@ class Solution {
     }
     
     public int minimumDeleteSum(String s1, String s2) {
+        totalAsciiSum=asciiOfAnString(s1)+asciiOfAnString(s2);
         int[][]memo=new int[s1.length()][s2.length()];
-        int totalAsciiSum=asciiOfAnString(s1)+asciiOfAnString(s2);
         for(int[]ar:memo){Arrays.fill(ar,-1);}
         return  totalAsciiSum-2*allCommonSub(s1,s2,0,0,memo);
     } 
