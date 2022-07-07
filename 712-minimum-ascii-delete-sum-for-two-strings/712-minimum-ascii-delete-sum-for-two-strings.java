@@ -14,7 +14,7 @@ class Solution {
                 else dp[i][j]=Math.max(dp[i+1][j],dp[i][j+1]);
             }
         }
-        return asciiOfAnString(s1)+asciiOfAnString(s2)-2*dp[0][0];
+        return asciiOfAnString(s1+s2)-2*dp[0][0];
     }
     
 }
