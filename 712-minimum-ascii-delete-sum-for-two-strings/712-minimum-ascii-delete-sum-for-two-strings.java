@@ -8,13 +8,13 @@ class Solution {
     public int minimumDeleteSum(String s1, String s2) {
         int r=s1.length(),c=s2.length();
         int[][]dp=new int[r+1][c+1];
-        for(int i=r-1;i>=0;i-=1){
-            for(int j=c-1;j>=0;j-=1){
-                if(s1.charAt(i)==s2.charAt(j)) dp[i][j]=dp[i+1][j+1]+(int)s1.charAt(i);
-                else dp[i][j]=Math.max(dp[i+1][j],dp[i][j+1]);
+        for(int i=1;i<=r;i+=1){
+            for(int j=1;j<=c;j+=1){
+                if(s1.charAt(i-1)==s2.charAt(j-1)) dp[i][j]=dp[i-1][j-1]+(int)s1.charAt(i-1);
+                else dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
             }
         }
-        return asciiOfAnString(s1+s2)-2*dp[0][0];
+        return asciiOfAnString(s1+s2)-2*dp[r][c];
     }
     
 }
