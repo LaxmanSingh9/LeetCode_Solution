@@ -1,7 +1,6 @@
 class Solution {
    public int lengthOfLIS(int[] nums) {
         int n=nums.length,ans=1,LISIndex=0;
-        int[]dp=new int[n];Arrays.fill(dp,1);
         List<List<Integer>>lis=new ArrayList<>();
         for(int i=0;i<n;i+=1)
           lis.add(new ArrayList<>());
