@@ -1,20 +1,23 @@
 class Solution {
-   public int lengthOfLIS(int[] nums) {
-        int n=nums.length,ans=1,LISIndex=0;
-        List<List<Integer>>lis=new ArrayList<>();
-        for(int i=0;i<n;i+=1)
-          lis.add(new ArrayList<>());
-        for(int i=0;i<n;i+=1){
-          for(int j=i;j>=0;j-=1){
-            if(nums[i]>nums[j] && lis.get(j).size()>lis.get(i).size())
-               lis.set(i,new ArrayList<>(lis.get(j)));
-            }
-          lis.get(i).add(nums[i]);
-          if(ans<lis.get(i).size()){
-             LISIndex=i;ans=lis.get(i).size();
-          }
-           
+  
+   public int solve(int[]nums,int i,int prev,int[][]dp){
+       if(i==nums.length)
+          return 0;
+       if(prev!=-1 && dp[i][prev]!=-1)
+          return dp[i][prev];
+       int exculde=solve(nums,i+1,prev,dp);
+       int include=0;
+       if(prev==-1 || nums[i]>nums[prev])
+          include=1+solve(nums,i+1,i,dp);
+       if(prev!=-1)
+          dp[i][prev]=Math.max(exculde,include);
+       return Math.max(exculde,include);
+   }
+   public int lengthOfLIS(int[] nums){
+        int [][]dp=new int[nums.length+1][nums.length+1];
+        for(int []ar:dp){
+            Arrays.fill(ar,-1);
         }
-        return lis.get(LISIndex).size();    
-    }
+        return   solve(nums,0,-1,dp);
+   }
 }
