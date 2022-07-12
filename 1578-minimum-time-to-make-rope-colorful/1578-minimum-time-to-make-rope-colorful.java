@@ -6,9 +6,8 @@ class Solution {
                 ans+=Math.min(prev==0?neededTime[i-1]:prev,neededTime[i]);
                 prev=Math.max(neededTime[i],prev==0?neededTime[i-1]:prev);
             }
-            else{
-                prev=0;
-            }
+            else prev=0;
+        
         }
         return ans;
     }
