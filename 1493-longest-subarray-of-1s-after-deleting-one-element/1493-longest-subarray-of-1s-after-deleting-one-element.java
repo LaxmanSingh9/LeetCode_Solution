@@ -5,20 +5,12 @@ class Solution {
             sum=0;
             while(j<n && nums[j]==1) {
                 sum+=nums[j];
-                if(j-i+1!=sum && j-i+1!=sum+1){
-                    break;
-                }
+                if(j-i+1!=sum && j-i+1!=sum+1)break;
                 j+=1;
-               
             }
-           // System.out.println(sum+" "+(j-i+1));
-            ans=Math.max(ans,sum+prev);
-            prev=sum;
-            
-            i=j;j+=1;
+            ans=Math.max(ans,sum+prev);prev=sum;i=j;j+=1;
             
         }
-      //  System.out.println(ans+" "+n);
         return ans==n?ans-1:ans;
     }
 }
