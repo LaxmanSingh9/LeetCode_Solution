@@ -1,7 +1,10 @@
 class Solution {
   public int solve(int n,int []dp){
-      if(n<=3){
-          return n<=1?-1:1;
+      if(n<=1){
+          return -1;
+      }
+      if(n==2 || n==3){
+          return 1;
       }
       if(dp[n]!=0)
           return dp[n];
