@@ -1,35 +1,27 @@
 class Solution {
-  public int solve(int n,int []dp){
-      if(n<=1){
-          return -1;
-      }
-      if(n==2 || n==3){
-          return 1;
-      }
-      if(dp[n]!=0)
-          return dp[n];
-      int ans1=solve(n-2,dp);
-      int ans2=solve(n-3,dp);
-      if(ans1<=-1 && ans2<=-1) 
-        dp[n]=-1;
-      else
-        dp[n]=1+(Math.min(ans1,ans2)==-1?Math.max(ans1,ans2):Math.min(ans1,ans2));
-      return dp[n];
+  public int[] solve(int []dp){
+     dp[0]=1;dp[1]=-1;dp[2]=1;dp[3]=1;dp[4]=2;dp[5]=2;
+     for(int i=6;i<dp.length;i+=1){
+         dp[i]=1+Math.min(dp[i-2],dp[i-3]);
+     }
+     return dp;
   } 
   public int minimumRounds(int[] tasks) {
+      int []dp=new int[100015];
       Map<Integer,Integer>map=new HashMap<>();
-      int ans=0,round=0;
-      int []dp=new int [tasks.length+1];
       for(int val:tasks){
           if(map.containsKey(val))
              map.put(val,map.get(val)+1);
           else
              map.put(val,1);
       }
+      int ans=0,n;dp=solve(dp);
       for (Map.Entry<Integer,Integer> entry : map.entrySet()){
-          round=solve(entry.getValue(),dp);
-          if(round==-1)return -1;
-          else ans+=round;
+          n=entry.getValue();
+          if(dp[n]==-1){
+              return -1;
+          }
+          ans+=dp[n];
       }
       return ans;
   
