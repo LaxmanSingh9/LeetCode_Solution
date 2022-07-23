@@ -16,7 +16,7 @@ class Solution {
   public int minimumRounds(int[] tasks) {
       Map<Integer,Integer>map=new HashMap<>();
       int ans=0,round=0;
-      int []dp=new int [tasks.length+3];
+      int []dp=new int [tasks.length+1];
       for(int val:tasks){
           if(map.containsKey(val))
              map.put(val,map.get(val)+1);
