@@ -1,11 +1,10 @@
 class Solution {
   public int minimumRounds(int[] tasks) {
-      Map<Integer,Integer>map=new HashMap<>();
+      Map<Integer,Integer>freq=new HashMap<>();
       for(int val:tasks)
-         map.put(val,map.getOrDefault(val,0)+1);
+         freq.put(val,freq.getOrDefault(val,0)+1);
       int ans=0;
-      for (Map.Entry<Integer,Integer> entry : map.entrySet()){
-          int n=entry.getValue();
+      for(int n:freq.values()) {
           if(n==1)return -1;
           else ans+=n/3+(n%3==0?0:1);
       }
