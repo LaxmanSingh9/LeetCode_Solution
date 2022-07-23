@@ -6,16 +6,13 @@ class Solution {
          dp[i]=1+Math.min(dp[i-2],dp[i-3]);
       }
       Map<Integer,Integer>map=new HashMap<>();
-      for(int val:tasks){
-          if(map.containsKey(val))
-             map.put(val,map.get(val)+1);
-          else
-             map.put(val,1);
-      }
+      for(int val:tasks)
+         map.put(val,map.getOrDefault(val,0)+1);
+      
       int ans=0;
       for (Map.Entry<Integer,Integer> entry : map.entrySet()){
           int n=entry.getValue();
-          if(dp[n]==-1){
+          if(n==1){
               return -1;
           }
           ans+=dp[n];
