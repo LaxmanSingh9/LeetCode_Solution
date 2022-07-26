@@ -14,6 +14,8 @@ class Solution {
         int consist=0;
         if(arr[i]<=target)
           consist=solve(arr,i+1,target-arr[i],memo);
+        if(consist==1)
+            return 1;
         int skip=solve(arr,i+1,target,memo);
         memo[i][target]= consist==1?consist:skip;
         return memo[i][target];
