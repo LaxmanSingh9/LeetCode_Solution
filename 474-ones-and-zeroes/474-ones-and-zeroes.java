@@ -10,20 +10,22 @@ class Solution {
         return totalZeros;
     }
     public int findMaxForm(String[] strs, int m, int n) {
-        int [][][]dp=new int[strs.length+1][m+1][n+1];
+        int [][]dp=new int[m+1][n+1];
         int ans=0,zeros=0,ones=0;
-        for(int i=1;i<strs.length+1;i+=1){
-            zeros=cal(strs[i-1]);ones=(strs[i-1].length())-zeros;
-            for(int j=0;j<m+1;j+=1){
-              for(int k=0;k<n+1;k+=1){
+        for(int i=0;i<strs.length;i+=1){
+            zeros=cal(strs[i]);ones=(strs[i].length())-zeros;
+            for(int j=m;j>=zeros;j-=1){
+              for(int k=n;k>=ones;k-=1){
                  if(j>=zeros && k>=ones)
-                     dp[i][j][k] = Math.max(dp[i-1][j][k], dp[i-1][j-zeros][k-ones]+1);
+                     dp[j][k] = Math.max(dp[j][k], dp[j-zeros][k-ones]+1);
                  
                  else
-                    dp[i][j][k]=dp[i-1][j][k];
+                    dp[j][k]=dp[j][k];
+                 //System.out.print(dp[j][k]+" ");
                 }
+                
             }
         }
-        return dp[strs.length][m][n];
+        return dp[m][n];
     }
 }
