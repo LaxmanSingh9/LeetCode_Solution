@@ -12,7 +12,7 @@ class Solution {
     public int findMaxForm(String[] strs, int m, int n) {
         int [][][]dp=new int[strs.length+1][m+1][n+1];
         int ans=0,zeros=0,ones=0;
-        for(int i=0;i<strs.length+1;i+=1){
+        for(int i=1;i<strs.length+1;i+=1){
             if(i!=0){
                  zeros=cal(strs[i-1]);ones=(strs[i-1].length())-zeros;
             }
