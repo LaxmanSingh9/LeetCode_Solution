@@ -5,31 +5,38 @@ class Solution {
             ans+=val;
         return ans;
     }
-    public int  solve(int arr[],int i,int target,int [][]memo){
-        if(target==0 || i>=arr.length)
-            return target==0?1:0;
-        if(memo[i][target]!=-1){
-            return memo[i][target];
-        }
-        int consist=0;
-        if(arr[i]<=target)
-          consist=solve(arr,i+1,target-arr[i],memo);
-        if(consist==1){
-             memo[i][target]=1;
-            return 1;
-         }
-         int skip=solve(arr,i+1,target,memo);
-        memo[i][target]= consist==1?consist:skip;
-        return memo[i][target];
-        
-        
-    }
     public boolean canPartition(int[] nums) {
         int sumOfArr=calSumOfArr(nums);
-        if(sumOfArr%2==1)
-            return false;
-        int [][]memo=new int[nums.length+1][sumOfArr/2+2];
-        for(int []ar:memo)Arrays.fill(ar,-1);
-        return solve(nums,0,sumOfArr/2,memo)==1?true:false;
+          if ((sumOfArr & 1) == 1)
+              return false;
+    
+        int n=nums.length,target=sumOfArr/2;
+        boolean [][]dp=new boolean[n+1][target+1];
+        for(int i=0;i<n+1;i+=1)
+            dp[i][0]=true;
+        for(int j=1;j<target+1;j+=1)
+            dp[0][j]=false;
+        for(int i=1;i<n+1;i+=1){
+            for(int j=1;j<target+1;j+=1){
+                dp[i][j]=dp[i-1][j];
+                if(j>=nums[i-1])
+                  dp[i][j]=(dp[i][j] || dp[i-1][j-nums[i-1]]);
+            }
+        }
+        return dp[n][target];
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
