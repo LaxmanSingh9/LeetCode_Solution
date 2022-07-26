@@ -16,13 +16,8 @@ class Solution {
             zeros=cal(strs[i]);ones=(strs[i].length())-zeros;
             for(int j=m;j>=zeros;j-=1){
               for(int k=n;k>=ones;k-=1){
-                 if(j>=zeros && k>=ones)
-                     dp[j][k] = Math.max(dp[j][k], dp[j-zeros][k-ones]+1);
-                 
-                 else
-                    dp[j][k]=dp[j][k];
-                // System.out.print(dp[j][k]+" ");
-                }
+                  dp[j][k] = Math.max(dp[j][k], dp[j-zeros][k-ones]+1);
+              }
                 
             }
         }
