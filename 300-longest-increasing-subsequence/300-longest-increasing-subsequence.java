@@ -5,8 +5,8 @@ class Solution {
         if(prev!=-1 && memo[i][prev]!=-1)
             return memo[i][prev];
         int add=0,skip=0;
-        if(prev==-1 || nums[prev]<nums[i])
-          add=solve(nums,i+1,i,memo)+1;
+        if(prev==-1 || nums[prev]<nums[i])//To add 1 length subsubseq
+            add=solve(nums,i+1,i,memo)+1;
         skip=solve(nums,i+1,prev,memo);
         if(prev!=-1)
            memo[i][prev]=Math.max(add,skip);
