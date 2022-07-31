@@ -16,7 +16,7 @@ class Solution {
           } 
         }
         for(int i=1;i<n-1;i+=1){
-           if(pref[i]>1 &&suff[i]>1)
+           if(pref[i]>1 &&suff[i]>1) //both atleast should be greater than one 
              ans=Math.max(pref[i]+suff[i]-1,ans);
         }
         return nums.length-ans;
