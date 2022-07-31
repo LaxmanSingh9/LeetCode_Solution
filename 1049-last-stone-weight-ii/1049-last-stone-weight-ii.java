@@ -1,6 +1,6 @@
 class Solution {
     int ans=Integer.MAX_VALUE;
-    public int solve(int []arr,int i,int target,int curr,int[][]memo){
+    public int solve(int []arr,int i,int target,int[][]memo){
         if(i>=arr.length){
            return target;
         }
@@ -8,9 +8,9 @@ class Solution {
             return memo[i][target];
         int skip=Integer.MAX_VALUE,add=Integer.MAX_VALUE;
         if(arr[i]<=target){
-             add=solve(arr,i+1,target-arr[i],curr+arr[i],memo);
+             add=solve(arr,i+1,target-arr[i],memo);
         }
-        skip=solve(arr,i+1,target,curr,memo);
+        skip=solve(arr,i+1,target,memo);
         memo[i][target]=Math.min(add,skip);
         return  memo[i][target];
     }
@@ -20,6 +20,6 @@ class Solution {
         int [][]memo=new int[stones.length+1][sum/2+1];
         for(int []ar:memo)Arrays.fill(ar,-1);
         int target=(sum>>1);
-        return sum-2 *(target-solve(stones,0,target,0,memo)) ;
+        return sum-2 *(target-solve(stones,0,target,memo)) ;
     }
 }
