@@ -15,21 +15,21 @@
  */
 class Solution {
     TreeNode currNode;
-    List<TreeNode>list=new ArrayList<>();
+    List<Integer>list=new ArrayList<>();
     public void inorder(TreeNode root){
         if(root==null)return;
         inorder(root.left);
-        list.add(root);
+        list.add(root.val);
         inorder(root.right);
     }
     public TreeNode increasingBST(TreeNode root) {
-        inorder(root);
-        for(int i=0;i<list.size()-1;i+=1){
-            list.get(i).left=null;
-            list.get(i).right=list.get(i+1);
+        inorder(root);TreeNode ans=new TreeNode(0);TreeNode curr;
+        curr=ans;
+        for(int i=0;i<list.size();i+=1){
+            curr.right=new TreeNode(list.get(i));
+            curr=curr.right;
             
         }
-        list.get(list.size()-1).left=null;
-        return list.get(0);
+        return ans.right;
     } 
 }
