@@ -14,23 +14,19 @@
  * }
  */
 class Solution {
-    TreeNode cur;
-    public void inorder(TreeNode root) {
-        if(root==null){
-            return ;
-        }
+    TreeNode currNode;
+    public void inorder(TreeNode root){
+        if(root==null)return;
         inorder(root.left);
         root.left=null;
-        cur.right=root;
-        cur=root;
+        currNode.right=root;
+        currNode=root;
         inorder(root.right);
-        
-        
     }
-    public TreeNode increasingBST(TreeNode root){
-       TreeNode answer =new TreeNode(0);
-       cur=answer;
+    public TreeNode increasingBST(TreeNode root) {
+       TreeNode answer=new TreeNode(0);
+       currNode=answer;
        inorder(root);
        return answer.right; 
-    }
+    } 
 }
