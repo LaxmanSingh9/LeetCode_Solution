@@ -21,9 +21,8 @@ class Solution {
     List<Integer>ans=new ArrayList<>();
     public void solve(Node root){
           if(root==null){return ;}
-          for(Node node:root.children){
+          for(Node node:root.children) 
              solve(node);  
-          }
           ans.add(root.val);
     }
     public List<Integer> postorder(Node root) {
