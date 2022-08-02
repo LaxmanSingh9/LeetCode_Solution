@@ -15,15 +15,34 @@
  */
 class Solution {
     public TreeNode solve(TreeNode root1,TreeNode root2){
-        if(root2==null)return root1;
-        if(root1==null)return root2; 
-        root1.val+=root2.val;
-        root1.left=solve(root1.left,root2.left);
-        root1.right=solve(root1.right,root2.right);
-        return root1;
-        
+          Queue<TreeNode>q1=new LinkedList<>();
+          Queue<TreeNode>q2=new LinkedList<>();
+          q1.add(root1);q2.add(root2);
+          while(q1.size()>0 || q2.size()>0){
+              TreeNode node1=q1.poll();
+              TreeNode node2=q2.poll();
+              node1.val+=node2.val;
+              if(node1.left!=null && node2.left!=null){
+                  q1.add(node1.left);q2.add(node2.left);
+              }
+              if(node1.right!=null && node2.right!=null){
+                  q1.add(node1.right);q2.add(node2.right);
+              }
+              if(node1.left==null){
+                  node1.left=node2.left;
+              }
+              if(node1.right==null){
+                  node1.right=node2.right;
+              }
+                  
+                  
+              
+          }
+          return root1;
     }
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
-       return  solve(root1,root2);
+        if(root1==null){return root2;}
+        if(root2==null){return root1;}
+        return  solve(root1,root2);
     }
 }
