@@ -16,20 +16,16 @@
 class Solution {
     public int solve(TreeNode root,String s){
         if(root==null){
-           int val=0;
-           for(int i=0;i<s.length();i+=1){
-               val+=(s.charAt(i)-'0')*(int)Math.pow(2,i);
-           }
-           return val; 
+            return Integer.parseInt(s,2); 
         }
        
         if(root.left==null || root.right==null){
-            return Math.max(solve(root.left,root.val+s),
-                 solve(root.right,root.val+s));
+            return Math.max(solve(root.left,s+root.val),
+                 solve(root.right,s+root.val));
         }
         else{
-             return solve(root.left,root.val+s)
-                    +solve(root.right,root.val+s);
+             return solve(root.left,s+root.val)
+                    +solve(root.right,s+root.val);
         }
         
     }
