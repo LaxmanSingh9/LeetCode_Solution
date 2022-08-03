@@ -14,22 +14,18 @@
  * }
  */
 class Solution {
-    public int solve(TreeNode root,String s){
+    public int solve(TreeNode root,int sum){
         if(root==null){
-            return Integer.parseInt(s,2); 
+            return 0;
         }
-       
-        if(root.left==null || root.right==null){
-            return Math.max(solve(root.left,s+root.val),
-                 solve(root.right,s+root.val));
+        if(root.left==null && root.right==null){
+            return (2*sum)+root.val;
         }
-        else{
-             return solve(root.left,s+root.val)
-                    +solve(root.right,s+root.val);
-        }
+        sum=(2*sum)+root.val;
+        return solve(root.left,sum)+solve(root.right,sum);
         
     }
     public int sumRootToLeaf(TreeNode root) {
-          return solve(root,"");
+        return solve(root,0);
     }
 }
