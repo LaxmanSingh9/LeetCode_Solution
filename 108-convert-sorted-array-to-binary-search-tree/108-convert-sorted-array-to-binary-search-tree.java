@@ -14,17 +14,15 @@
  * }
  */
 class Solution {
-    public TreeNode makeArray(int[] nums,int l,int r){
-         if(l>r){return null;}
-         int mid=(l+r)/2;
-         TreeNode node=new TreeNode(nums[mid]);
-         node.right=makeArray(nums,mid+1,r);
-         node.left=makeArray(nums,l,mid-1);
-         return node;
-        
-   }
-    
+    public TreeNode solve(int []nums,int l,int r){
+        if(l>r){return null;}
+        int mid=(l+r)/2;
+        TreeNode node=new TreeNode(nums[mid]);
+        node.left=solve(nums,l,mid-1);
+        node.right=solve(nums,mid+1,r);
+        return node;
+    }
     public TreeNode sortedArrayToBST(int[] nums) {
-        return makeArray(nums,0,nums.length-1);
+        return solve(nums,0,nums.length-1);
     }
 }
