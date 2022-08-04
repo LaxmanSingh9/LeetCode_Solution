@@ -14,39 +14,12 @@
  * }
  */
 class Solution {
-     //Inorder Traversal that will provide sorted list
-    public void inorder(TreeNode root,List<Integer>listOfNodeVal){
-          if(root==null){
-              return ;
-          }
-          inorder(root.left,listOfNodeVal);
-          if(root!=null){
-            listOfNodeVal.add(root.val);//Push the node val in list
-          }
-        
-          inorder(root.right,listOfNodeVal);
-        
-    }
-    
+    Map<Integer,Integer>map=new HashMap<>();
     public boolean findTarget(TreeNode root, int k) {
-        List<Integer> listOfNodeVal=new ArrayList<>();
-        inorder(root,listOfNodeVal);
-        //Two Pointer Method
-        int l=0;int r=listOfNodeVal.size()-1;
-        while(l!=r){
-            if(listOfNodeVal.get(l)+listOfNodeVal.get(r)==k){
-                return true;
-            }
-            else if(listOfNodeVal.get(l)+listOfNodeVal.get(r)>k){r-=1;}
-            else{
-                l+=1;
-            }
-        }
-        return false;
-        
-        
-        
-         
+        if(root==null){return false;}
+        if(map.containsKey(root.val)){return true;}
+        map.put(k-root.val,1);
+        return findTarget(root.left,k) || findTarget(root.right,k);
         
     }
 }
