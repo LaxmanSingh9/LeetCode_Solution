@@ -14,25 +14,36 @@
  * }
  */
 class Solution {
+    Map<Integer,List<Double>>map=new HashMap<>();
+    public void solve(TreeNode root,int level){
+        if(root==null){
+            return  ;
+        }
+        double d=root.val;
+        List<Double>l=new ArrayList<>();
+        if(map.containsKey(level)){
+            l=map.get(level);
+            l.add(d);
+            map.put(level,l);
+        }
+        if(!map.containsKey(level)){
+            l.add(d);
+            map.put(level,l);
+        }
+        solve(root.left,level+1);
+        solve(root.right,level+1);
+    }
+    
     public List<Double> averageOfLevels(TreeNode root) {
-        Queue<TreeNode>q=new LinkedList<>();
+        solve(root,0);
+        double sum=0f;
         List<Double>ans=new ArrayList<>();
-        q.add(root);
-        int level=0;
-        while(!q.isEmpty()) {
-            int width=q.size();
-            double sum=0f;int totalNodes=width;
-            while(width-->0){
-               TreeNode node=q.poll();
-               sum+=node.val;
-               if(node.left!=null)
-                  q.offer(node.left);
-               if(node.right!=null)
-                  q.offer(node.right);
-            }
-            ans.add(sum/totalNodes);
+        for(List<Double>list:map.values()){
+           for(double val:list)
+                sum+=val;
+            ans.add(sum/(list.size()));
+            sum=0f;
         }
         return ans;
-        
     }
 }
