@@ -15,12 +15,14 @@
  */
 class Solution {
     Map<Integer,Integer>map=new HashMap<>();
-    int maxLevel=0,ans=0;
+    int maxLevel=-1,sum=0;
     public void solve(TreeNode root ,int level){
         if(root==null){return;}
-        if(level>=maxLevel){
-           map.put(level,map.getOrDefault(level,0)+root.val);
-          ans=map.get(level);maxLevel=level;
+        if(level>maxLevel){
+            sum=0;maxLevel=level;
+        }
+        if(level==maxLevel){
+            sum+=root.val;
         }
         solve(root.left,level+1);
         solve(root.right,level+1);
@@ -28,7 +30,7 @@ class Solution {
     }
     public int deepestLeavesSum(TreeNode root) {
         solve(root,0);
-        return ans;
+        return sum;
         
     }
 }
