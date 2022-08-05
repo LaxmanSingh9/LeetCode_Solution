@@ -18,8 +18,8 @@ class Solution {
     int maxLevel=0,ans=0;
     public void solve(TreeNode root ,int level){
         if(root==null){return;}
-        map.put(level,map.getOrDefault(level,0)+root.val);
         if(level>=maxLevel){
+           map.put(level,map.getOrDefault(level,0)+root.val);
           ans=map.get(level);maxLevel=level;
         }
         solve(root.left,level+1);
