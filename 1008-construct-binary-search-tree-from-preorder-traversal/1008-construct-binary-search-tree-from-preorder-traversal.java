@@ -15,13 +15,13 @@
  */
 class Solution {
     public int findNextBiggerEle(int []nums,int l,int r){
-        int max=nums[l],index=r+1,i;
+        int max=nums[l],index=r+1,i;  //here not found return r+1
         for(i=l;i<=r;i+=1){
             if(nums[i]>max){
                index=i;break;
             }
         }
-        return i;
+        return index;
        
         
     }
