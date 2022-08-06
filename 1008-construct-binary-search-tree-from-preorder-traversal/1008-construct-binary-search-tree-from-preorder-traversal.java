@@ -14,21 +14,28 @@
  * }
  */
 class Solution {
-    public TreeNode solution(int[] preorder,int s,int e){
-        if(s>e){return null;}
-        int val=preorder[s];
-        TreeNode node=new TreeNode(val);
-        int i;
-        for(i=s;i<=e;i+=1){
-           if(preorder[i]>val){
-               break;
-           }
+    public int findNextBiggerEle(int []nums,int l,int r){
+        int max=nums[l],index=l,i;
+        for(i=l;i<=r;i+=1){
+            if(nums[i]>max){
+               index=i;max=nums[l];break;
+            }
         }
-        node.left=solution(preorder,s+1,i-1);
-        node.right=solution(preorder,i,e);
+        return i;
+       
+        
+    }
+    public TreeNode solve(int []pre,int l,int r){
+        if(l>r){return null;}
+        TreeNode node=new TreeNode(pre[l]);
+        int i=findNextBiggerEle(pre,l,r);
+        node.left=solve(pre,l+1,i-1);
+        node.right=solve(pre,i,r);
         return node;
+        
     }
     public TreeNode bstFromPreorder(int[] preorder) {
-        return solution(preorder,0,preorder.length-1);
+       int len=preorder.length;
+       return solve(preorder,0,len-1);
     }
 }
