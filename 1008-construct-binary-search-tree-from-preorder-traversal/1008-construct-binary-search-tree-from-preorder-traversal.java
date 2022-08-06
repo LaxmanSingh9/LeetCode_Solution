@@ -14,28 +14,36 @@
  * }
  */
 class Solution {
-    public int findNextBiggerEle(int []nums,int l,int r){
-        int max=nums[l],index=r+1,i;  //here not found return r+1
-        for(i=l;i<=r;i+=1){
-            if(nums[i]>max){
-               index=i;break;
-            }
+    public TreeNode solve(TreeNode root,int val){
+        TreeNode curr=root;
+        TreeNode parent=null;
+        while(curr!=null){
+            parent=curr;
+            if(curr.val>val)
+                curr=curr.left;
+            else
+              curr=curr.right;
         }
-        return index;
-       
-        
-    }
-    public TreeNode solve(int []pre,int l,int r){
-        if(l>r){return null;}
-        TreeNode node=new TreeNode(pre[l]);
-        int i=findNextBiggerEle(pre,l,r);
-        node.left=solve(pre,l+1,i-1);
-        node.right=solve(pre,i,r);
-        return node;
-        
+        if(parent.val>val)
+          parent.left=new TreeNode(val);
+        else
+          parent.right=new TreeNode(val);
+        return root;
     }
     public TreeNode bstFromPreorder(int[] preorder) {
        int len=preorder.length;
-       return solve(preorder,0,len-1);
+       TreeNode root=new TreeNode(preorder[0]);
+       for(int i=1;i<preorder.length;i+=1)
+           solve(root,preorder[i]);
+       return root;
     }
 }
+
+
+
+
+
+
+
+
+
