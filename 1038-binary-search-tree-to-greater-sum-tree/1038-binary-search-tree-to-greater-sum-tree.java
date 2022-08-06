@@ -15,6 +15,24 @@
  */
 class Solution {
     int sum=0;
+    public TreeNode bfs(TreeNode root){
+       Stack<TreeNode>stack=new Stack<>();
+       int sum=0;
+       TreeNode curr=root;
+       while(curr!=null || !stack.isEmpty()) {
+           while(curr!=null){
+               stack.push(curr);
+               curr=curr.right;
+           }
+           curr=stack.pop();
+           //System.out.println(curr.val);
+           sum+=curr.val;
+           curr.val=sum;
+           
+           curr=curr.left;
+       }
+       return root;    
+    }
     public void solve(TreeNode root){
         if(root==null){return ;}
         solve(root.right);
@@ -23,7 +41,7 @@ class Solution {
         solve(root.left);
     }
     public TreeNode bstToGst(TreeNode root) {
-      solve(root);
+      bfs(root);
       return root;
         
     }
