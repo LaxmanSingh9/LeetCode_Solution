@@ -13,28 +13,25 @@
  *     }
  * }
  */
-class Solution{
-    //Using divide and conquer to contrcut the bal BST3
-    public TreeNode MakeBalBSTFromSortedList(int s,int e,List<TreeNode>sortBSTArr){
-        if(s>e){return null;}
-        int mid=(s+e)/2;
-        TreeNode node=sortBSTArr.get(mid);
-        node.left=MakeBalBSTFromSortedList(s,mid-1,sortBSTArr);
-        node.right=MakeBalBSTFromSortedList(mid+1,e,sortBSTArr);
+class Solution {
+    private List<Integer>sortedArr=new ArrayList<>();
+    public void  inOrderTrevarsal(TreeNode root){
+        if(root==null)return ;
+        inOrderTrevarsal(root.left);
+        sortedArr.add(root.val);
+        inOrderTrevarsal(root.right);
+    }
+    public TreeNode createBSTFromArr(List<Integer>sortArr,int l,int r){
+        if(l>r)return null;
+        int mid=(l+r)/2;
+        TreeNode node=new TreeNode(sortArr.get(mid));
+        node.left=createBSTFromArr(sortArr,l,mid-1);
+        node.right=createBSTFromArr(sortArr,mid+1,r);
         return node;
         
-        
-    }
-    //Get the sort arr from inorder traversal of bst
-    public void GetSortedBSTList(TreeNode root,List<TreeNode>sortBSTArr){
-        if(root==null){return ;}
-        GetSortedBSTList(root.left,sortBSTArr);
-        sortBSTArr.add(root);
-        GetSortedBSTList(root.right,sortBSTArr);
     }
     public TreeNode balanceBST(TreeNode root) {
-        List<TreeNode>sortBSTArr=new ArrayList<>();
-        GetSortedBSTList(root,sortBSTArr) ;//GET THE SORTED ARRAY
-        return MakeBalBSTFromSortedList(0,sortBSTArr.size()-1,sortBSTArr);//return root
+        inOrderTrevarsal(root);
+        return createBSTFromArr(sortedArr,0,sortedArr.size()-1);
     }
 }
