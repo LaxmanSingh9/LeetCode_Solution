@@ -20,6 +20,9 @@ class Solution {
         if(N<=0 || N%2==0){
             return res;
         }
+        if(map.containsKey(N)){
+            return map.get(N);
+        }
         if(N==1){
            TreeNode node=new TreeNode(0);res.add(node);
            return res;
@@ -39,7 +42,7 @@ class Solution {
            }
             
         }
-        map.put(N,res);
+        map.put(N+1,res);
         return res;
     }
     public List<TreeNode> allPossibleFBT(int n) {
