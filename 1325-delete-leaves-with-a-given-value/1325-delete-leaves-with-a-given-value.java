@@ -14,24 +14,21 @@
  * }
  */
 class Solution {
-    boolean  isPresent=true;
-    public TreeNode solve(TreeNode  root ,int target){
-        if(root==null){
-            return null;
-        }
-        if(root.left==null && root.right==null && root.val==target){
-            isPresent=true;
-            return null;
-        }
-        root.left=solve(root.left,target);
-        root.right=solve(root.right,target);
+   public TreeNode solve(TreeNode  root ,int target){
+      if(root == null)
+            return root;
+        
+       root.left = removeLeafNodes(root.left , target);
+        root.right = removeLeafNodes(root.right , target);
+        
+        if(root.left == null && root.right == null && root.val == target)
+            root = null;
+        
+        
         return root;
     }
     public TreeNode removeLeafNodes(TreeNode root, int target) {
-        while(isPresent==true && root!=null){
-            isPresent=false;
-            root=solve(root,target);
-        }
-        return root;
+       
+        return  solve(root,target);
     }
 }
