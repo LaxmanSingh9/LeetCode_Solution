@@ -15,16 +15,15 @@
  */
 class Solution {
     private int ans1=0;
-    public int solve(TreeNode root,int max,int ans){
-      if(root==null){return ans;} 
-      if(max<=root.val){ans+=1;ans1+=1;}
+    public void solve(TreeNode root,int max){
+      if(root==null){return ;} 
+      if(max<=root.val){ans1+=1;}
       max=Math.max(max,root.val);
-      int left=solve(root.left,max,ans);
-      int right=solve(root.right,max,ans);
-      return left+right;
+      solve(root.left,max);
+      solve(root.right,max);
     }
     public int goodNodes(TreeNode root) {
-        solve(root,Integer.MIN_VALUE,0);
+        solve(root,Integer.MIN_VALUE);
         return ans1;
     } 
 }
