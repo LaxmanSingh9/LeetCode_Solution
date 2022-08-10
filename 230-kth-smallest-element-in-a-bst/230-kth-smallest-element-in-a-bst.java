@@ -14,24 +14,23 @@
  * }
  */
 class Solution {
-    public int kthSmallest(TreeNode root, int k) {
-        Stack<TreeNode>stack=new Stack<TreeNode>();
-        TreeNode buffer=root;int count=0;
-        int ans=-1;
-        while(buffer!=null || ans==-1|| !stack.isEmpty()){
-            if(buffer!=null){
-                stack.push(buffer);
-                buffer=buffer.left;
-            }
-            else{
-                 buffer=stack.pop();
-                if(++count==k){
-                    ans=buffer.val;
-                }
-                buffer=buffer.right;
-            }
-            
+    int index=0;
+    public int solve(TreeNode root,int k){
+        if(root.left!=null){
+             int left=solve(root.left,k);
+             if(left!=0)return left;
         }
-        return ans;
+        index+=1;
+        if(index==k){
+            return root.val;
+        }
+        if(root.right!=null){
+           int right=solve(root.right,k);
+           if(right!=0)return right;
+        }
+        return 0;
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        return solve(root,k);
     }
 }
