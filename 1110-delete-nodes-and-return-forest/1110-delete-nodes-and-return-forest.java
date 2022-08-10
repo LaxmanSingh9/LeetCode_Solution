@@ -15,31 +15,42 @@
  */
 class Solution {
     List<TreeNode>ans=new ArrayList<>();
-    public TreeNode solve(TreeNode root,Map<Integer,Integer>map){
-        if(root==null){return null;}
-        TreeNode left=solve(root.left,map);
-        TreeNode right=solve(root.right,map);
-        if(map.containsKey(root.val)){
-            if(left!=null)
-              ans.add(left);
-            if(right!=null)
-              ans.add(right);
-            return null;
+     public List<TreeNode> solve(TreeNode root,Map<Integer,Integer>map){
+        if(root==null)return ans;
+        Queue<TreeNode>q=new LinkedList<>();
+        if(!map.containsKey(root.val)){
+            ans.add(root);
         }
-        root.left=left;root.right=right;
-        return root;
+        q.add(root);
+        while(!q.isEmpty()){
+            TreeNode node=q.poll();
+            if(node.left!=null) {
+                q.add(node.left);
+                if(map.containsKey(node.left.val))
+                  node.left=null;
+              
+            }
+            if(node.right!=null) {
+                q.add(node.right);
+                if(map.containsKey(node.right.val))
+                  node.right=null;
+            }
+            if(map.containsKey(node.val)){
+                if(node.left!=null)
+                  ans.add(node.left);
+                if(node.right!=null)
+                 ans.add(node.right);
+                node=null;
+            }
+        }
         
-    } 
-        
-        
-        
+        return ans;
+    }
     public List<TreeNode> delNodes(TreeNode root, int[] ar) {
         Map<Integer,Integer>map=new HashMap<>();
         for(int a:ar)
             map.put(a,a);
-        root=solve(root,map);
-        if(root!=null)ans.add(root);
-        return ans;
+        return solve(root,map);
     }
 }
 
