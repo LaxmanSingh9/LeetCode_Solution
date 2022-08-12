@@ -22,8 +22,9 @@ class Solution {
                if(ar[i]%2==0)even+=1;
                else odd+=1;
            }
+           if(odd>1)return false;
         }
-        return odd>1?false:true;
+        return true;
     }
    public int  solve(TreeNode root, int []freq){
         if(root==null)return 0;
