@@ -25,8 +25,7 @@ class Solution {
         }
         return odd>1?false:true;
     }
-    int ans=0;
-    public int  solve(TreeNode root, int []freq){
+   public int  solve(TreeNode root, int []freq){
         if(root==null)return 0;
         freq[root.val]=freq[root.val]+1;
         if(root.left==null && root.right==null){
@@ -40,8 +39,6 @@ class Solution {
         return l+r;
     }
     public int pseudoPalindromicPaths (TreeNode root) {
-        int ar[]=new int [10];
-       
-        return  solve(root,ar);
+        return  solve(root,new int [10]);
     }
 }
