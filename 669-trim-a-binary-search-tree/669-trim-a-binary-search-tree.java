@@ -14,14 +14,22 @@
  * }
  */
 class Solution {
+    public TreeNode solve(TreeNode root,int low ,int high){
+        if(root==null)
+          return null;
+        if(root.val>=low && root.val<=high){
+            root.left=solve(root.left,low,high);
+            root.right=solve(root.right,low,high); 
+        }
+        else if(root.val<low){
+           root=solve(root.right,low,high);
+        }
+        else if(root.val>high){
+            root=solve(root.left,low,high);
+        }
+        return root;
+    }
     public TreeNode trimBST(TreeNode root, int low, int high) {
-        if(root==null ){return null;}
-        if(root.val<low || root.val>high){
-            return root.val>high?trimBST(root.left,low,high):trimBST(root.right,low,high);
-        }    
-       root.left=trimBST(root.left,low,high);
-       root.right=trimBST(root.right,low,high);
-       return root;
-    
+        return solve(root,low,high);
     }
 }
