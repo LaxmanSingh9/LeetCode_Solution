@@ -18,7 +18,7 @@ class Solution {
         Queue<TreeNode>q=new LinkedList<>();
         q.add(root);
         int level=1,max=Integer.MIN_VALUE,levl=0,sum=0;
-        while(q.size()>0) {
+        while(!q.isEmpty()) {
             int si=q.size();
             levl+=1;sum=0;
             while(si>0){
