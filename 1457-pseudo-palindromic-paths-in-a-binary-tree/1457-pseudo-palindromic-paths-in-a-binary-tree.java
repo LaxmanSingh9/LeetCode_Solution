@@ -26,19 +26,22 @@ class Solution {
         return odd>1?false:true;
     }
     int ans=0;
-    public void  solve(TreeNode root, int []freq){
-        if(root==null)return;
+    public int  solve(TreeNode root, int []freq){
+        if(root==null)return 0;
         freq[root.val]=freq[root.val]+1;
         if(root.left==null && root.right==null){
-            if(isPseudoPalin(freq))ans+=1;
+           int a=isPseudoPalin(freq)?1:0;
+           freq[root.val]-=1;
+           return a;
         }
-        solve(root.left,freq);
-        solve(root.right,freq);
+        int l=solve(root.left,freq);
+        int r=solve(root.right,freq);
         freq[root.val]=freq[root.val]-1 ;
+        return l+r;
     }
     public int pseudoPalindromicPaths (TreeNode root) {
         int ar[]=new int [10];
-        solve(root,ar);
-        return ans;
+       
+        return  solve(root,ar);
     }
 }
