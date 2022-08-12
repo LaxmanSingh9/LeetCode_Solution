@@ -27,13 +27,14 @@ class Solution {
         return true;
     }
    public int  solve(TreeNode root, int []freq){
-        if(root==null)return 0;
-        freq[root.val]=freq[root.val]+1;
+        if(root==null){return 0;}
         if(root.left==null && root.right==null){
+           freq[root.val]+=1;
            int a=isPseudoPalin(freq)?1:0;
            freq[root.val]-=1;
            return a;
         }
+        freq[root.val]=freq[root.val]+1;
         int l=solve(root.left,freq);
         int r=solve(root.right,freq);
         freq[root.val]=freq[root.val]-1 ;
