@@ -42,10 +42,6 @@ class Solution {
               ans.add(key);
         
         }
-        int[] arr=new  int[ans.size()];
-        for(int i=0;i<ans.size();i+=1){
-            arr[i]=ans.get(i);
-        }
-        return arr;
+        return ans.stream().mapToInt(i->i).toArray();
     }
 }
