@@ -16,8 +16,8 @@
 class Solution {
 public void solve(TreeNode root,int d,List<Integer>ans){
         if(root==null){return;}
-        if(ans.size()>=d+1)ans.set(d,Math.max(root.val,ans.get(d)));
-        else ans.add(root.val);
+        if(ans.size()>=d+1 && ans.get(d)<root.val)ans.set(d,root.val);
+        else if(ans.size()<d+1) ans.add(root.val);
         solve(root.left,d+1,ans);
         solve(root.right,d+1,ans);
     }
