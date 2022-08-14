@@ -14,16 +14,21 @@
  * }
  */
 class Solution {
-   public  TreeNode solve(TreeNode root,TreeNode  prev){
-        if(root==null){return prev;}
-        TreeNode r=solve(root.right,prev);
-        TreeNode l=solve(root.left,r);
-        root.right=l;
-        root.left=null;
-        return root;
-        
-    }
     public void flatten(TreeNode root) {
-        solve(root,null);
+        if(root!=null){
+           Stack<TreeNode>st=new Stack<>();
+           st.push(root);
+           while(!st.isEmpty()){
+            TreeNode curr=st.pop();
+            if(curr.right!=null)
+               st.push(curr.right);
+            if(curr.left!=null)
+              st.push(curr.left);
+            if(!st.isEmpty())
+               curr.right=st.peek();
+            curr.left=null;
+          }
+      }
+         
     }
 }
