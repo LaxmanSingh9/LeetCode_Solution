@@ -14,16 +14,16 @@
  * }
  */
 class Solution {
-    TreeNode prev=null;
-    public  void solve(TreeNode root){
-        if(root==null){return;}
-        solve(root.right);
-        solve(root.left);
-        root.right=prev;
+   public  TreeNode solve(TreeNode root,TreeNode  prev){
+        if(root==null){return prev;}
+        TreeNode r=solve(root.right,prev);
+        TreeNode l=solve(root.left,r);
+        root.right=l;
         root.left=null;
-        prev=root;
+        return root;
+        
     }
     public void flatten(TreeNode root) {
-        solve(root);
+        solve(root,null);
     }
 }
