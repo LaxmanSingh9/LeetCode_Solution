@@ -6,7 +6,8 @@ class Solution {
             if(diff<0)
               return false;
             if(!currChar.equals("#"))
-                diff+=2;
+               diff+=2;
+            
         }
         return diff==0;
         
