@@ -1,16 +1,14 @@
 class Solution {
     public boolean isValidSerialization(String preorder) {
-        Stack<String>stack=new Stack<>();
-        for(String currChar:preorder.split(",")) {
-            while(currChar.equals("#") && !stack.isEmpty() && stack.peek().equals("#")){
-                stack.pop();
-                if(stack.isEmpty())
-                    return false;
-                stack.pop();
-            }
-            stack.push(currChar);
+        Integer diff=1;
+        for(String currChar:preorder.split(",")){
+            diff-=1;
+            if(diff<0)
+              return false;
+            if(!currChar.equals("#"))
+                diff+=2;
         }
-        return stack.size()==1 && stack.peek().equals("#");
+        return diff==0;
         
     }
 }
