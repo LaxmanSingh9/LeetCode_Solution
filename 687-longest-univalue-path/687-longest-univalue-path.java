@@ -14,21 +14,19 @@
  * }
  */
 class Solution {
-    public int uniValueSubtrees(TreeNode root,int prev){
-        if(root==null || root.val!=prev){return 0;}
-        int left=uniValueSubtrees(root.left,prev);
-        int right=uniValueSubtrees(root.right,prev);
-        return 1+Math.max(left,right);
-    }
-    public void solve(TreeNode root,int []ans){
-        if(root==null){return;}
-        ans[0]=Math.max(ans[0],uniValueSubtrees(root.left,root.val)+uniValueSubtrees(root.right,root.val));
-        solve(root.left,ans);
-        solve(root.right,ans);
+   public int solve(TreeNode root,int val,int []ans){
+        if(root==null){return 0;}
+        int left=solve(root.left,root.val,ans);
+        int right=solve(root.right,root.val,ans);
+        ans[0]=Math.max(ans[0],left+right);
+        if(root.val==val)
+            return 1+Math.max(left,right);
+        return 0;    
     }
     public int longestUnivaluePath(TreeNode root) {
+         if(root==null)return 0; 
          int ans[]=new int[1];
-         solve(root,ans);
+         solve(root,root.val,ans);
          return ans[0];
     }
 }
