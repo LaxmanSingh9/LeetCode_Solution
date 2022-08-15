@@ -20,15 +20,15 @@ class Solution {
         int right=uniValueSubtrees(root.right,prev);
         return 1+Math.max(left,right);
     }
-    int ans=0;
-    public void solve(TreeNode root){
+    public void solve(TreeNode root,int []ans){
         if(root==null){return;}
-        ans=Math.max(ans,uniValueSubtrees(root.left,root.val)+uniValueSubtrees(root.right,root.val));
-        solve(root.left);
-        solve(root.right);
+        ans[0]=Math.max(ans[0],uniValueSubtrees(root.left,root.val)+uniValueSubtrees(root.right,root.val));
+        solve(root.left,ans);
+        solve(root.right,ans);
     }
     public int longestUnivaluePath(TreeNode root) {
-         solve(root);
-         return ans;
+         int ans[]=new int[1];
+         solve(root,ans);
+         return ans[0];
     }
 }
