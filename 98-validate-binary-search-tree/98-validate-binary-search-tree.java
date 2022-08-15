@@ -17,7 +17,7 @@ class Solution {
     public boolean validate(TreeNode root,long min,long max){
         if(root==null)
            return true;
-        else if(max!=Long.MAX_VALUE && max<=root.val  || min!=Long.MIN_VALUE && min>=root.val)
+        else if(max<=root.val  || min>=root.val)
            return false;
         else
            return validate(root.left,min,root.val)&&validate(root.right,root.val,max);
