@@ -14,9 +14,9 @@ class Solution {
                   return cnt;
               }
               for(int i=0;i<word.length();i+=1){
-                 for(int k = 'a'; k <= 'z'; k++){
+                 for(int j=0;j<26;j+=1){
                      char arr[] = word.toCharArray();
-                     arr[i] = (char) k;
+                     arr[i] = (char) (j+97);
                      String str = new String(arr);
                      if(set.contains(str) && !vis.contains(str)){
                          q.add(str);
