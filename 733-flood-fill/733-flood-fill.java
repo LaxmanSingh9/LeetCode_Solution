@@ -1,10 +1,5 @@
 class Solution {
-     int [][]comToAdj=new int[][]{
-                {0,1},
-                {0,-1},
-                {1,0},
-                {-1,0},
-    };
+    int [][]comToAdj=new int[][]{{0,1},{0,-1},{1,0},{-1,0},};
     public void solve(int [][]img,int st,int end,int color,int srcCol){
         if(st<0 || st>=img.length|| end<0 || end>=img[0].length || img[st][end]!=srcCol)
           return;   
