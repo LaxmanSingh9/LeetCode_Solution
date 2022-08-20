@@ -3,11 +3,16 @@ class Solution {
         if(st<0 || st>=row|| end<0 || end>=col || img[st][end]!=srcCol)
           return;   
         img[st][end]=color;
-        solve(img,st+1,end,color,srcCol,row,col);
-        solve(img,st-1,end,color,srcCol,row,col);
-        solve(img,st,end+1,color,srcCol,row,col);
-        solve(img,st,end-1,color,srcCol,row,col);
-    }
+         int [][]comToAdj=new int[][]{
+                {0,1},
+                {0,-1},
+                {1,0},
+                {-1,0},
+        };
+        for(int []com:comToAdj)
+         solve(img,st+com[0],end+com[1],color,srcCol,row,col);
+    
+      }
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         if(image[sr][sc]==color)
             return image;
