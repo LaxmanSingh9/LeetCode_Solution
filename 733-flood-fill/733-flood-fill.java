@@ -1,22 +1,21 @@
 class Solution {
-    public void solve(int [][]img,int st,int end,int color,int srcCol,int row,int col){
-        if(st<0 || st>=row|| end<0 || end>=col || img[st][end]!=srcCol)
-          return;   
-        img[st][end]=color;
-         int [][]comToAdj=new int[][]{
+     int [][]comToAdj=new int[][]{
                 {0,1},
                 {0,-1},
                 {1,0},
                 {-1,0},
-        };
+    };
+    public void solve(int [][]img,int st,int end,int color,int srcCol){
+        if(st<0 || st>=img.length|| end<0 || end>=img[0].length || img[st][end]!=srcCol)
+          return;   
+        img[st][end]=color;
         for(int []com:comToAdj)
-         solve(img,st+com[0],end+com[1],color,srcCol,row,col);
-    
-      }
+          solve(img,st+com[0],end+com[1],color,srcCol);
+    }
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         if(image[sr][sc]==color)
             return image;
-        solve(image,sr,sc,color,image[sr][sc],image.length,image[0].length);
+        solve(image,sr,sc,color,image[sr][sc]);
         return image;
         
         //call an dfs
