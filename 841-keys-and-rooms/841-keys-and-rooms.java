@@ -1,14 +1,14 @@
 class Solution {
-    public void dfs(List<List<Integer>>adj,boolean[]vis,int u){
+    public void exploreRooms(List<List<Integer>>adj,boolean[]vis,int u){
           vis[u]=true;
           for(int v:adj.get(u)){
               if(!vis[v])
-                dfs(adj,vis,v);
+                exploreRooms(adj,vis,v);
           }
     }
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
         boolean []vis=new boolean[rooms.size()];
-        dfs(rooms,vis,0);
+        exploreRooms(rooms,vis,0);
         for(int i=0;i<vis.length;i++){
             if(!vis[i]){
                   return false;
