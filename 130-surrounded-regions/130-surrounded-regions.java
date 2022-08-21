@@ -10,8 +10,7 @@ class Solution {
     }
     public boolean isValidRegion(char[][]board,Integer rowN,Integer colN,int[][]vis){
         if((rowN<=0 || rowN>=board.length-1 || colN<=0 || colN>=board[0].length-1) && board[rowN][colN]=='O'){
-           // System.out.println(board[rowN][colN]+"-" + rowN+" "+ colN); 
-            return false;
+           return false;
         }
            
         if(rowN<0 || rowN>board.length || colN<0 || colN>board[0].length || board[rowN][colN]!='O')
