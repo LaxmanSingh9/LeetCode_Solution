@@ -1,20 +1,23 @@
 class Solution {
-    public void dfs(List<List<Integer>>graph,int s,int[]visited){
-        visited[s]=1;
-        for(int edge:graph.get(s))
-            if(visited[edge]!=1)
-                dfs(graph,edge,visited);
-        
+    public void dfs(List<List<Integer>>adj,boolean[]vis,int u){
+          vis[u]=true;
+          for(int v:adj.get(u)){
+              if(!vis[v])
+                dfs(adj,vis,v);
+          }
     }
-    public boolean canVisitAllRooms(List<List<Integer>> graph){
-      int n=graph.size();int[] visited = new int[n];
-      dfs(graph,0,visited);
-      for(int i=0;i<n;i+=1)
-        if(visited[i]==0 &&i!=0)
-            return false;
-      
-      return true;
-
-        
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        boolean []vis=new boolean[rooms.size()];
+        dfs(rooms,vis,0);
+        for(int i=0;i<vis.length;i++){
+            if(!vis[i]){
+                  return false;
+            }
+        }    
+        return true;
+        //we are given adjceny list
+        //run an dfs or bfs ,start from 0 since it is unlocked
+        //after dfs or bfs check weather all the rooms visited or not 
+    
     }
 }
