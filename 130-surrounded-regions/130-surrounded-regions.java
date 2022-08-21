@@ -10,18 +10,23 @@ class Solution {
     }
     public void solve(char[][] board) {
         int row=board.length,col=board[0].length;
+        //Convert all the regions into * ,which we can not convert into 'X'
+        
+        //For zero and m-1 rows
         for(int i=0;i<col;i++){
             if(board[0][i]=='O')
                 dfs(board,0,i);
             if(board[row-1][i]=='O')
                dfs(board,row-1,i);
         }
+         //For zero and n-1 cols
         for(int i=0;i<row;i++){
             if(board[i][0]=='O')
                 dfs(board,i,0);
             if(board[i][col-1]=='O')
                 dfs(board,i,col-1);
         }
+        //convert * back to 'O' and all the 'O' into 'X'
         for(int i=0;i<board.length;i+=1){
             for(int j=0;j<board[0].length;j+=1){
               if(board[i][j]=='O')
