@@ -1,52 +1,38 @@
 class Solution {
-  
-    public boolean hasCycle(int s,int[][]graph,int[]v){
-        if(v[s]!=0){
-            return v[s]==1;
+    public boolean isPartOfAnCycle(Integer v,boolean[]vis,int[][]graph,int[]recSt){
+        if(recSt[v]!=0)
+            return recSt[v]==1;
+        vis[v]=true;
+        recSt[v]=1;
+        for(Integer u:graph[v]){
+            if(recSt[u]==1 || isPartOfAnCycle(u,vis,graph,recSt))
+                return true;
         }
-        v[s]=1;
-        for(int e:graph[s]){
-            if(hasCycle(e,graph,v)==true){
-               return true;
-            }
-         
-        }
-        v[s]=2;
+        recSt[v]=2;
         return false;
         
     }
-    public List<Integer> eventualSafeNodes(int[][] edges) {
-        int n=edges.length;
-        List<Integer>ans=new ArrayList<>();int []inDeg=new int[n];
-        Map<Integer,List<Integer>> graph = new HashMap();
-        for(int i=0;i<n;i++){
-            graph.put(i,new ArrayList());
-        }
-        for(int i=0;i<n;i+=1){
-            for(int edge:edges[i]){
-                graph.get(edge).add(i);
-                inDeg[i]+=1;
+    
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int V=graph.length;
+        List<Integer>result=new ArrayList<>(); 
+        int []recSt=new int[V];//1=part of cycle,2=not part of cycle
+        boolean []vis=new boolean[V];//false=not visited yet , true=visited 
+        for(int v=0;v<V;v+=1){
+            if(!vis[v] && !isPartOfAnCycle(v,vis,graph,recSt)){
+                result.add(v);
             }
-              
-        }
-        Queue<Integer>q=new LinkedList<>();
-        for(int i=0;i<n;i+=1){
-            if(inDeg[i]==0)
-                q.add(i);
-        }
-        while(!q.isEmpty()){
-            int s=q.poll();
-            ans.add(s);
-            for(int edge:graph.get(s)){
-                inDeg[edge]-=1;
-                if(inDeg[edge]==0){
-                    q.add(edge);
-                }
+            else if(vis[v] && recSt[v]==2){
+                result.add(v);
             }
-            
-       }
-       Collections.sort(ans);
-       return ans;
+        }    
+        return result;
+        
+        
+        
+        //will run an cycle detectcion algo for all the nodes
+        // if an node is an part of cycle that means ,it will not lead to an terminal node
+        
+        
     }
-
 }
