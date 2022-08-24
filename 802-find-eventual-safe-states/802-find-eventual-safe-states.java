@@ -13,8 +13,6 @@
 
 class Solution {
    public boolean isPartOfAnCycle(Integer v,boolean[]vis,int[][]graph,int[]recSt){
-        if(recSt[v]!=0)          //Avoid call for cycle nodes or non-cycle node
-            return recSt[v]==1;
         vis[v]=true;
         recSt[v]=1;
         for(Integer u:graph[v]){
