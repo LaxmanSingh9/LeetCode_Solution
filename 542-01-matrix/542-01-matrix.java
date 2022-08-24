@@ -2,8 +2,8 @@ class Solution {
     int [][]comOfAdj=new int[][]{{0,1},{0,-1},{1,0},{-1,0},};
     public void dfs(int[][]graph,int[][]dist,int u,int v,int prev){
         dist[u][v]=prev;
-        for(int []com:comOfAdj){
-            int x=u+com[0],y=v+com[1];
+        for(int i=0;i<4;i+=1){
+            int x=u+comOfAdj[i][0],y=v+comOfAdj[i][1];
             if((x>=0&&x<graph.length) && (y>=0 && y<graph[0].length)&& graph[x][y]!=0 && (dist[x][y]>dist[u][v]+1))
                dfs(graph,dist,x,y,dist[u][v]+1);
         }
