@@ -13,8 +13,8 @@
 
 class Solution {
    public boolean isPartOfAnCycle(Integer v,boolean[]vis,int[][]graph,int[]recSt){
-        if(recSt[v]!=0)          //Avoid call for cycle nodes or non-cycle node
-            return recSt[v]==1;
+        // if(recSt[v]!=0)          //Avoid call for cycle nodes or non-cycle node
+        //     return recSt[v]==1;
         vis[v]=true;
         recSt[v]=1;
         for(Integer u:graph[v]){
@@ -34,7 +34,9 @@ class Solution {
         int []recSt=new int[V];//1=part of cycle,2=not part of cycle
         boolean []vis=new boolean[V];//false=not visited yet , true=visited 
         for(int v=0;v<V;v+=1){
-            if(!isPartOfAnCycle(v,vis,graph,recSt))
+            if(vis[v]==false && !isPartOfAnCycle(v,vis,graph,recSt))
+                result.add(v);
+            else if(vis[v]==true && recSt[v]==2)
                 result.add(v);
         }    
         return result;
