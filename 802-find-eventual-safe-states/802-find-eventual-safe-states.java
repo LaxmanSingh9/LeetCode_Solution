@@ -19,16 +19,10 @@ class Solution {
         int []recSt=new int[V];//1=part of cycle,2=not part of cycle
         boolean []vis=new boolean[V];//false=not visited yet , true=visited 
         for(int v=0;v<V;v+=1){
-            if(!vis[v] && !isPartOfAnCycle(v,vis,graph,recSt)){
+            if(!isPartOfAnCycle(v,vis,graph,recSt))
                 result.add(v);
-            }
-            else if(vis[v] && recSt[v]==2){
-                result.add(v);
-            }
         }    
         return result;
-        
-        
         
         //will run an cycle detectcion algo for all the nodes
         // if an node is an part of cycle that means ,it will not lead to an terminal node
