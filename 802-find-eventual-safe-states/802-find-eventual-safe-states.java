@@ -18,8 +18,11 @@ class Solution {
         vis[v]=true;
         recSt[v]=1;
         for(Integer u:graph[v]){
-            if(recSt[u]==1 || isPartOfAnCycle(u,vis,graph,recSt))
+           if(vis[u]==false && isPartOfAnCycle(u,vis,graph,recSt))
                 return true;
+            if(recSt[u]==1 )
+                return true;
+           
         }
         recSt[v]=2;
         return false;
