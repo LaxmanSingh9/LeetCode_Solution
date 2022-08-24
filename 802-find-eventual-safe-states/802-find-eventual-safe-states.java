@@ -1,6 +1,19 @@
+ 
+    //Brute Force
+     //  1.Run for all the nodes
+     //  2.Check does this gives an cycel or not
+     //  3. if node has an cycle exculde from result
+     //  TC=>O(V*(V+E)),RSC=O(V+E)
+    //Efficent Solution 
+     // To make it effiecent , we will keep track of an node has an cycle or not
+     //  we will avoid call for already hasCycle or non-hasCycle nodes
+     //TC=>O(V+E) ,SC=>O(V)
+    //Space Optimized Solution
+    //we can use also one array to track both visited and hasCycle or not
+
 class Solution {
-    public boolean isPartOfAnCycle(Integer v,boolean[]vis,int[][]graph,int[]recSt){
-        if(recSt[v]!=0)
+   public boolean isPartOfAnCycle(Integer v,boolean[]vis,int[][]graph,int[]recSt){
+        if(recSt[v]!=0)          //Avoid call for cycle nodes or non-cycle node
             return recSt[v]==1;
         vis[v]=true;
         recSt[v]=1;
@@ -12,7 +25,6 @@ class Solution {
         return false;
         
     }
-    
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int V=graph.length;
         List<Integer>result=new ArrayList<>(); 
