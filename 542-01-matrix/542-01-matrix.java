@@ -4,8 +4,10 @@ class Solution {
         dist[u][v]=prev;
         for(int i=0;i<4;i+=1){
             int x=u+comOfAdj[i][0],y=v+comOfAdj[i][1];
-            if((x>=0&&x<graph.length) && (y>=0 && y<graph[0].length)&& graph[x][y]!=0 && (dist[x][y]>dist[u][v]+1))
-               dfs(graph,dist,x,y,dist[u][v]+1);
+            if((x>=0&&x<graph.length) && (y>=0 && y<graph[0].length)&& graph[x][y]!=0 && (dist[x][y]>prev+1)){
+                 dfs(graph,dist,x,y,prev+1);
+            }
+               
         }
     }
     public int[][] updateMatrix(int[][] mat) {
