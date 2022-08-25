@@ -1,4 +1,5 @@
 class Solution {
+    //Test case if all zero or ones then return -1
     public int findMaxDistance(int[][]arr){
         int maxDis=0;
         for(int i=0;i<arr.length;i++){
@@ -28,7 +29,7 @@ class Solution {
            int u=node[0],v=node[1],x=0,y=0;
            for(int k=0;k<4;k++){
                x=u+comOfAdj[k][0];y=v+comOfAdj[k][1];
-               if((x>=0 && x<m)&&(y>=0 && y<n) &&(dist[x][y]>dist[u][v]+1)){
+               if((x>=0 && x<m)&&(y>=0 && y<n) &&(dist[x][y]>dist[u][v]+1) && graph[x][y]!=1){
                    dist[x][y]=dist[u][v]+1;
                    queue.add(new int[]{x,y});
                    
