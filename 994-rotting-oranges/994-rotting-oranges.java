@@ -16,6 +16,9 @@ class Solution {
               }
           }
         }
+        if(queue.size()==0 && freshOrg>0){
+             return -1; 
+        }
         if(freshOrg==0)
             return 0;
         int dist=0;
