@@ -32,6 +32,7 @@ class Solution {
                     int newX=x+comOfAdj[i][0];
                     int newY=y+comOfAdj[i][1];
                     if((newX>=0 &&  newX<m)&&(newY>=0 && newY<n)&& graph[newX][newY]!=0){
+                        freshOrg-=1;
                         graph[newX][newY]=0;
                         queue.add(new int[]{newX,newY});
                     }
@@ -40,13 +41,7 @@ class Solution {
             }
             
         }
-        for(int i=0;i<m;i+=1){
-          for(int j=0;j<n;j+=1){
-              if(graph[i][j]!=0)
-                  return -1;
-          }
-        }
-        return dist-1;
+        return freshOrg==0?dist-1:-1;
         
     }
 }
