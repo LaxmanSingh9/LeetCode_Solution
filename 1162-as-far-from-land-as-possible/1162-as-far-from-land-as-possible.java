@@ -23,14 +23,17 @@ class Solution {
                 int newX=x+comOfAdj[k][0];
                 int newY=y+comOfAdj[k][1];
                 if((newX>=0 && newX<m)&&(newY>=0 && newY<n) && graph[newX][newY]==0){
-                   maxDis=Math.max(maxDis,dist);
-                   graph[newX][newY]=1;
+                   graph[newX][newY]=dist;
                    queue.add(new int[]{newX,newY});
                 }
              }
             }
         }
+        for(int i=0;i<m;i++){
+          for(int j=0;j<n;j++){
+              maxDis=Math.max(graph[i][j],maxDis);
+          }
+        }
         return maxDis;
-        
     }
 }
