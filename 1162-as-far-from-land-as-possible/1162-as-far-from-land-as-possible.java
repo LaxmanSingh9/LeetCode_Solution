@@ -10,28 +10,27 @@ class Solution {
                 }
             }
         }
-        if(queue.size()==m*n)
+        if(queue.size()==m*n || queue.size()== 0)
            return -1;
-        int dist=0;
+        int dist=0,maxDis=0;
         while(!queue.isEmpty()){
             int size=queue.size(); 
             dist++;
-            while(size>0){
+            while(size-->0){
               int[]node=queue.poll();
               int x=node[0],y=node[1];
               for(int k=0;k<4;k++){
                 int newX=x+comOfAdj[k][0];
                 int newY=y+comOfAdj[k][1];
                 if((newX>=0 && newX<m)&&(newY>=0 && newY<n) && graph[newX][newY]==0){
+                   maxDis=Math.max(maxDis,dist);
                    graph[newX][newY]=1;
                    queue.add(new int[]{newX,newY});
                 }
              }
-             size-=1;
-           }
-           
+            }
         }
-        return dist-1;
+        return maxDis;
         
     }
 }
