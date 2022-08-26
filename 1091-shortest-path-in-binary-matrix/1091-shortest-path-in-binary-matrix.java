@@ -12,9 +12,9 @@ class Solution {
         
     }
     public int shortestPathBinaryMatrix(int[][] graph) {
-      if(graph[0][0]!=0)
-          return -1;
       int m=graph.length,n=graph[0].length;  
+      if(graph[0][0]!=0 || graph[n-1][n-1]==1)
+          return -1;
       Queue<int[]>queue=new LinkedList<>();
       queue.add(new int[]{0,0});
       int dist=0;
