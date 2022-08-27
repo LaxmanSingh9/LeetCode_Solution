@@ -1,43 +1,34 @@
 class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        int n=numCourses;
-        Map<Integer,List<Integer>> graph = new HashMap();
-        for(int i = 0 ; i < n ; i++){
-            graph.put(i, new ArrayList());
+        ArrayList<ArrayList<Integer>>adjList=new ArrayList<>();
+        for(int i=0;i<numCourses;i+=1)
+            adjList.add(new ArrayList<>());
+        int[]inorder=new int[numCourses];
+        for(int []pre:prerequisites){
+            inorder[pre[0]]+=1;
+            adjList.get(pre[1]).add(pre[0]);
         }
-        int []inDeg=new int[n];
-        for(int edges[]:prerequisites){
-            graph.get(edges[0]).add(edges[1]);
-            inDeg[edges[1]]+=1;
-        }
-        
-        //Topologival Sort
-       
-        Queue<Integer>q=new LinkedList<>();
-        for(int i=0;i<n;i+=1){
-            if(inDeg[i]==0)
-               q.add(i);
-        }
- 
-        Stack<Integer>list=new Stack<>();
-        while(q.isEmpty()==false){
-            int v=q.poll();
-            list.add(v);
-            n-=1;
-            for(int e:graph.get(v)){
-                if(--inDeg[e]==0){
-                 q.add(e);
-                }
-                 
+        Queue<Integer>queue=new LinkedList<>();
+        List<Integer>ans=new ArrayList<>();
+        for(int v=0;v<numCourses;v++){
+            if(inorder[v]==0){
+                ans.add(v);
+                queue.add(v);
             }
         }
-        int[] ans=new int[list.size()];
-        int idx=0;
-        while(list.isEmpty()==false){
-            ans[idx]=list.pop();
-            idx+=1;
+        while(!queue.isEmpty()){
+            int u=queue.poll();
+            for(int v:adjList.get(u)){
+                --inorder[v];
+                if(inorder[v]==0){
+                   ans.add(v);
+                   queue.add(v);
+                }
+            }
         }
-        return n==0?ans:new int[0];
-        
+        int []ansArr=new int[ans.size()];
+        for(int i=0;i<ans.size();i++)
+            ansArr[i]=ans.get(i);
+        return ans.size()!=numCourses?new int[0]:ansArr;
     }
 }
