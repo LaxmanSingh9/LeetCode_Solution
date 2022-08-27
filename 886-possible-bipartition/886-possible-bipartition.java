@@ -1,25 +1,32 @@
 class Solution {
-    public boolean possibleBipartition(int N, int[][] dislikes) {
-        int[] colors = new int[N + 1];
-        for(int i = 1; i <= N; ++i) colors[i] = i;
-        for(int i = 0; i < dislikes.length; ++i) {
-            int p1 = dislikes[i][0], p2 = dislikes[i][1];
-            if(colors[p2] == p2) colors[p2] = p1;
-            else {
-                int[] uf1 = find(p1, colors), uf2 = find(p2, colors);
-                if(uf1[0] == uf2[0] && uf1[1] == uf2[1]) return false;
-            }
+    public void addEdge(ArrayList<ArrayList<Integer>>adj,int u,int v){
+        adj.get(u-1).add(v-1);
+        adj.get(v-1).add(u-1);
+    }
+    public boolean checkBiPartitions(ArrayList<ArrayList<Integer>>graph,int []colorArr,int u,int col){
+        colorArr[u]=col;
+        for(int v:graph.get(u)){
+            if(colorArr[v]==-1 && !checkBiPartitions(graph,colorArr,v,col^1))
+                return false;
+            else if(colorArr[u]==colorArr[v])
+                return false;
         }
         return true;
     }
-    
-    private int[] find(int p, int[] colors) {
-        int color = 0;
-        while(colors[p] != p) {
-            p = colors[p];
-            color = color == 0 ? 1 : 0;
+    public boolean possibleBipartition(int n, int[][] dislikes) {
+        if(n==1  || dislikes.length==0)
+            return true;
+        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        int []colorArr=new int[n];
+        Arrays.fill(colorArr,-1);
+        for(int i=0;i<n;i+=1)
+            adj.add(new ArrayList<>());
+        for(int i=0;i<dislikes.length;i++)
+            addEdge(adj,dislikes[i][0],dislikes[i][1]);
+        for(int i=0;i<n;i+=1){
+            if(colorArr[i]==-1 && !checkBiPartitions(adj,colorArr,i,1))
+                return false;
         }
-        return new int[] {p, color};
+        return true;
     }
-    
 }
