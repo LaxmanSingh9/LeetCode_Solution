@@ -1,29 +1,32 @@
 class Solution {
+    public boolean doesContainCycle(ArrayList<ArrayList<Integer>>adj,boolean []visited,int []recSt,int u){
+        visited[u]=true;
+        recSt[u]=1;
+        for(int v:adj.get(u)){
+            if(!visited[v] && doesContainCycle(adj,visited,recSt,v))
+                return true;
+            if(recSt[v]==1)
+                return true;
+        }
+        recSt[u]=2;
+        return false;
+        
+}
     public boolean canFinish(int n, int[][] prerequisites) {        
-        int []incomingEdges=new int[n];
         ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++)
             adj.add(new ArrayList<Integer>());
-        }
-        for(int []pre:prerequisites){
-            incomingEdges[pre[1]]++;
+        for(int []pre:prerequisites)
             adj.get(pre[0]).add(pre[1]);
+        boolean []visited=new boolean[n];
+        int [] recSt=new int[n];
+        for(int i=0;i<n;i++){
+            if(!visited[i] && doesContainCycle(adj,visited,recSt,i))
+                return false;
+            else if(visited[i] && recSt[i]==1)
+                return false;
         }
-        Queue<Integer>queue=new LinkedList<>();
-        for(int v=0;v<n;v+=1){
-            if(incomingEdges[v]==0)
-                queue.add(v);
-        }
-       
-        while(!queue.isEmpty()){
-            int u=queue.poll();
-            for(int v:adj.get(u)){
-                if(--incomingEdges[v]==0){
-                    queue.add(v);
-                }
-            }
-            n-=1;
-        }
-        return n==0;
+        return true;
+        
      }
 }
