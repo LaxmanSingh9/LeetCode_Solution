@@ -1,11 +1,19 @@
 class Solution {
     public boolean isGraphBipartite(int[][]graph,int[] colorArr,int u,int col){
+        Queue<Integer>queue=new LinkedList<>();
+        queue.add(u);
         colorArr[u]=col;
-        for(int v:graph[u]){
-            if(colorArr[v]==0 && !isGraphBipartite(graph,colorArr,v,-col))
-              return false;
-            else if(colorArr[u]==colorArr[v])
-              return false;
+        while(!queue.isEmpty()){
+            int ver=queue.poll();
+            for(int v:graph[ver]){
+                if(colorArr[v]==0){
+                  queue.add(v);
+                  colorArr[v]=-colorArr[ver];
+                }
+                else if(colorArr[ver]==colorArr[v])
+                   return false;
+            }
+            
         }
         return true;
     }
