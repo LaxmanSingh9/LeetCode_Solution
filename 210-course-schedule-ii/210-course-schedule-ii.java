@@ -1,9 +1,20 @@
 class Solution {
-    public boolean doesContainsCycle(ArrayList<ArrayList<Integer>>adjList,boolean[]vis,int[]recSt,int u,Stack<Integer>st){
-        vis[u]=true;
+    public int[] getArrFromStack(Stack<Integer>st){
+        int []ansArr=new int[st.size()];
+        int idx=0;
+        while(!st.empty()){
+            int top=st.peek();
+            st.pop();
+            ansArr[idx++]=top;
+        }
+        return ansArr;
+    }
+    public boolean doesContainsCycle(ArrayList<ArrayList<Integer>>adjList,int[]recSt,int u,Stack<Integer>st){ 
+        if(recSt[u]!=0)
+            return recSt[u]==1;
         recSt[u]=1;
         for(int v:adjList.get(u)){
-            if(!vis[v] &&  doesContainsCycle(adjList,vis,recSt,v,st))
+            if(recSt[v]==0 &&  doesContainsCycle(adjList,recSt,v,st))
                 return true;
             else if(recSt[v]==1)
                 return true;
@@ -20,23 +31,13 @@ class Solution {
             adjList.add(new ArrayList<>());
         for(int []pre:prerequisites)
             adjList.get(pre[1]).add(pre[0]);
-        boolean vis[]=new boolean[numCourses];
         int recSt[]=new int[numCourses];
         Stack<Integer>preqStack=new Stack<>();
         for(int i=0;i<numCourses;i++){
-            if(!vis[i] && doesContainsCycle(adjList,vis,recSt,i,preqStack))
-                return new int[0];
-            else if(vis[i] && recSt[i]==1)
+            if(doesContainsCycle(adjList,recSt,i,preqStack))
                 return new int[0];
         }
-        int []ansArr=new int[preqStack.size()];
-        int idx=0;
-        while(!preqStack.empty()){
-            int top=preqStack.peek();
-            preqStack.pop();
-            ansArr[idx++]=top;
-        }
-        return ansArr;
+        return getArrFromStack(preqStack);
         
        
     }
