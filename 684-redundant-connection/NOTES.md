@@ -1,3 +1,4 @@
+**hasPath or hasCycle both can use to solve this problem**
 **There will be exactly n edges and no self loops and parral edges**
 **If we have n nodes  and n unique edges , we will always end up  with an connected and loop graph, there will be only one cycle.
 **
