@@ -1,16 +1,11 @@
 class Solution {
-    public boolean hasCycle(int [][]graph,boolean[]vis,int u,int parent){
+    public boolean hasPath(int [][]graph,boolean[]vis,int u,int v){
+        if(u==v)
+            return true;
         vis[u]=true;
         for(int i=0;i<graph.length;i++){
-           if(graph[u][i]==1){
-              if(vis[i]==false){
-                  if(hasCycle(graph,vis,i,u))
-                     return true;
-              }                
-              else if(i!=parent){
-                 return true;
-              }   
-            } 
+           if(graph[u][i]==1 && !vis[i] && hasPath(graph,vis,i,v))
+              return true;
         }
         return false;
     }
@@ -20,11 +15,11 @@ class Solution {
         boolean []vis;
         for(int []edge:edges){
             vis=new boolean[n];
-            graph[edge[0]-1][edge[1]-1]=1;
-            graph[edge[1]-1][edge[0]-1]=1;
-            if(hasCycle(graph,vis,edge[0]-1,edge[1]-1)){
+            if(hasPath(graph,vis,edge[0]-1,edge[1]-1)){
                return edge;  
             }
+            graph[edge[0]-1][edge[1]-1]=1;
+            graph[edge[1]-1][edge[0]-1]=1;
            
         }
         return new int[0];
