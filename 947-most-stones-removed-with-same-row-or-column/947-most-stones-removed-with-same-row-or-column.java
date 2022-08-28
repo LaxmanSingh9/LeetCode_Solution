@@ -1,24 +1,66 @@
-class Solution {
-    Set<int[]> visited=new HashSet<>();
-    public void dfs(int[][]arr,int []stone){
-        visited.add(stone);
-        for(int []ar:arr){
-            int newU=ar[0],newV=ar[1];
-            if((stone[0]==newU || stone[1]==newV) && visited.contains(ar)==false) {
-                dfs(arr,ar);
-            }
-        }
-    }
-    public int removeStones(int[][] stones) {
-      int remainStones=0;
-      for(int []stone:stones){
-          int x=stone[0],y=stone[1];
-          if(visited.contains(stone)==false){
-             dfs(stones,stone);
-             remainStones+=1;
-          }
+class UnionFind {
+    private int count;
+    private int[] parent,rank;
+    public UnionFind(int n) {
+      parent = new int[n];
+      rank = new int[n];
+      count=n;
+      for(int i = 0; i < n; i++) {
+        parent[i] = i;
       }
-      return stones.length-remainStones; 
-         
+    }
+    public void union(int x, int y) {
+      int rootX = find(x);
+      int rootY = find(y);
+      
+      if(rootX != rootY) {
+        if(rank[rootX] > rank[rootY]) {
+          rank[rootX]++;
+          parent[rootY] = rootX;
+        } else {
+          rank[rootY]++;
+          parent[rootX] = rootY;
+        }
+        count--;
+      }
+    }
+    
+    public int find(int x) {
+      if(parent[x] == x) return x;
+      
+      int root = find(parent[x]);
+      parent[x] = root; //path compression
+      return root;
+    }
+    
+    public boolean isConnected(int x, int y) {
+      return find(x) == find(y);
+    }
+    public int getCount(){
+        return count;
+    }
+ }
+
+
+
+class Solution {
+    public int removeStones(int[][] stones) {
+        int n=stones.length;
+        UnionFind uf=new UnionFind(n);
+        for(int i=0;i<n;i++){
+           for(int j=i+1;j<n;j++){
+               if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1])
+                  uf.union(i,j);
+           } 
+        }
+        return n-uf.getCount();
     }
 }
+
+
+
+
+
+
+
+
