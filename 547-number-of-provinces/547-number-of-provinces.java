@@ -47,7 +47,8 @@ class Solution {
         int n=isConnected.length;
         UnionFind ufind=new UnionFind(n);
         for(int i=0;i<n;i++){
-          for(int j=0;j<i;j++){
+          for(int j=0;j<n;j++){
+             // System.out.println(i+" "+j);
               if(isConnected[i][j]==1){
                   ufind.union(i,j);
                  
