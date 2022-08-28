@@ -2,12 +2,13 @@ class Solution {
     public void connectedProvinces(int[][]graph,boolean[]vis,int u){
        Queue<Integer>q=new LinkedList<>();
        q.add(u);
+       vis[u]=true;
        while(!q.isEmpty()){
            int ver=q.poll();
-           vis[ver]=true;
            for(int i=0;i<graph.length;i++){
                if(!vis[i] && graph[ver][i]==1){
-                    q.add(i);
+                   q.add(i);
+                   vis[i]=true;
                }
                   
            }
