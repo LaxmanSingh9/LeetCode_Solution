@@ -1,1 +1,1 @@
-​
+No paraal edge and no self edge , that means there are  all the unique edges  ,
