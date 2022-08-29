@@ -40,8 +40,6 @@ class UnionFind {
         return count;
     }
  }
-
-
 class Solution {
     public boolean equationsPossible(String[]  arr) {
         int n=arr.length;
@@ -49,20 +47,13 @@ class Solution {
         UnionFind uf=new UnionFind(26);
         for(int i=0;i<n;i++){
             if(arr[i].charAt(1)=='='){
-              int a=arr[i].charAt(0),b=arr[i].charAt(3);
-              //System.out.println(a-97+" "+b-97);
-              uf.union(a-97,b-97);
+              uf.union(arr[i].charAt(0)-97,arr[i].charAt(3)-97);
               vis[i]=1;
             }
         }
         for(int i=0;i<n;i++){
-            if(vis[i]==0){
-               int a=arr[i].charAt(0),b=arr[i].charAt(3);
-            //  System.out.println(a-97+" "+b-97); 
-               if(uf.isConnected(a-97,b-97))
-                   return false;
-               
-            }
+            if(vis[i]==0 && (uf.isConnected(arr[i].charAt(0)-97,arr[i].charAt(3)-97)))
+                return false;
         }
         return true;   
     }
