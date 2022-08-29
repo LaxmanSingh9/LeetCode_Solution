@@ -46,10 +46,10 @@ class Solution {
         UnionFind uf=new UnionFind(26);
         for(int i=0;i<n;i++){
             if(arr[i].charAt(1)=='=')
-              uf.union(arr[i].charAt(0)-97,arr[i].charAt(3)-97);
+              uf.union(arr[i].charAt(0)-'a',arr[i].charAt(3)-'a');
         }
         for(int i=0;i<n;i++){
-            if(arr[i].charAt(1)=='!' && (uf.isConnected(arr[i].charAt(0)-97,arr[i].charAt(3)-97)))
+            if(arr[i].charAt(1)=='!' && (uf.isConnected(arr[i].charAt(0)-'a',arr[i].charAt(3)-'a')))
               return false;
         }
         return true;   
