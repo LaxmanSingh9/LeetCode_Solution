@@ -1,36 +1,32 @@
 class Solution {
-    
-    public void dfs(Map<Integer,List<Integer>>graph,int []v,int s){
-        v[s]=1;
-        for(int e:graph.get(s)){
-           if(v[e]!=1) dfs(graph,v,e);
-            
+    //To connected n nodes , we al least need n-1 unique edges
+    //if there are n-1 edges then minimum opeation will be total disconnected componets in graph
+    public void dfs(ArrayList<ArrayList<Integer>>adjList,boolean []vis,int u){
+        vis[u]=true;
+        for(int v:adjList.get(u)){
+            if(!vis[v])
+                dfs(adjList,vis,v);
         }
-        
     }
-    public int makeConnected(int n, int[][] edges) {
-        if(edges.length<n-1){
-            return -1;  //need atleast n-1 edges to connect all the vertices
+    public int makeConnected(int n, int[][] connections) {
+        int totalConnections=connections.length;
+        if(totalConnections<n-1)
+            return -1;
+        ArrayList<ArrayList<Integer>>adjList=new ArrayList<>();
+        for(int i=0;i<n;i++)
+            adjList.add(new ArrayList<>());
+        for(int []con:connections){
+            adjList.get(con[0]).add(con[1]);
+            adjList.get(con[1]).add(con[0]);
         }
-        Map<Integer,List<Integer>> graph = new HashMap();
-        int[] visited = new int[n];
-        
-        for(int i = 0 ; i < n ; i++){
-            graph.put(i, new ArrayList());
-        }
-         //construct graph, add bidirectional vertex
-        for(int[] edge : edges){
-           graph.get(edge[0]).add(edge[1]);
-           graph.get(edge[1]).add(edge[0]);
-        }
-        int com=0;
-	    for(int i=0;i<n;i+=1){
-            if(visited[i]!=1){
-                dfs(graph,visited,i);    //count the componenets 
-                com+=1;
+        boolean[]vis=new boolean[n];
+        int totalComponents=0;
+        for(int i=0;i<n;i+=1){
+            if(!vis[i]){
+                dfs(adjList,vis,i);
+                totalComponents+=1;
             }
         }
-        return com-1;
-        
+        return totalComponents-1;//TotalDisconnectedComponents-1
     }
 }
