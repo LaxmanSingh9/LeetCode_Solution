@@ -43,17 +43,14 @@ class UnionFind {
 class Solution {
     public boolean equationsPossible(String[]  arr) {
         int n=arr.length;
-        int []vis=new int[n];
         UnionFind uf=new UnionFind(26);
         for(int i=0;i<n;i++){
-            if(arr[i].charAt(1)=='='){
+            if(arr[i].charAt(1)=='=')
               uf.union(arr[i].charAt(0)-97,arr[i].charAt(3)-97);
-              vis[i]=1;
-            }
         }
         for(int i=0;i<n;i++){
-            if(vis[i]==0 && (uf.isConnected(arr[i].charAt(0)-97,arr[i].charAt(3)-97)))
-                return false;
+            if(arr[i].charAt(1)=='!' && (uf.isConnected(arr[i].charAt(0)-97,arr[i].charAt(3)-97)))
+              return false;
         }
         return true;   
     }
