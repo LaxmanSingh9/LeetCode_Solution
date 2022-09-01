@@ -4,9 +4,7 @@ class Solution {
         Arrays.sort(pairs,(a,b)->{
             if(a[0]!=b[0])
                return a[0]-b[0];
-            if(a[1]!=b[1])
-                return a[1]-b[1];
-            return 0;
+            return a[1]-b[1];
         });
         int []dp=new int[n];
         Arrays.fill(dp,1);
