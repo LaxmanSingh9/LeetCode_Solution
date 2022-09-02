@@ -25,6 +25,8 @@ class Solution {
         for(int i=0;i<n;i++){
            dp[i]=1; 
            for(int j=i-1;j>=0;j--){
+               if(words[i].length()-words[j].length()>1)
+                    break;
                if(isPredecessor(words[i],words[j]))
                    dp[i]=Math.max(dp[i],dp[j]+1);
            }
