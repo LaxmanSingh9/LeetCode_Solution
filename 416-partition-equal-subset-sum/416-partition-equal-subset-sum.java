@@ -1,36 +1,26 @@
 class Solution {
-    public int calSumOfArr(int []ar){
-        int ans=0;
-        for(int val:ar)
-            ans+=val;
-        return ans;
+    public boolean canFindTargetSum(int []nums,int target,int i,int[][]memo){
+          if(target<=0 || i>=nums.length)
+              return target==0;
+          boolean include=false,skip=false;
+          if(memo[i][target]!=0)
+              return memo[i][target]==1;
+          if(nums[i]<=target)
+              include=canFindTargetSum(nums,target-nums[i],i+1,memo);
+          skip=canFindTargetSum(nums,target,i+1,memo);
+          memo[i][target]=(include || skip)?1:2;
+          return include || skip;
+          
     }
     public boolean canPartition(int[] nums) {
-        int sumOfArr=calSumOfArr(nums);
-        if((sumOfArr&1)==1)
-          return false;
-        int n=nums.length,target=sumOfArr/2;
-        boolean []dp=new boolean[target+1];
-        dp[0]=true;
-        for(int num:nums){
-            for(int i=target;i>=num;i-=1){
-                dp[i]=(dp[i]||dp[i-num]);
-            }
-        }
-        return dp[target];
+        int sumArr=0;
+        for(int val:nums)
+            sumArr+=val;
+        if(sumArr%2==1)
+            return false;
+        int target=sumArr/2;
+        int [][]memo=new int[nums.length+1][target+1];
+        return canFindTargetSum(nums,target,0,memo);
+        
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
