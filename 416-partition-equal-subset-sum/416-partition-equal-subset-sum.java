@@ -7,6 +7,8 @@ class Solution {
               return memo[i][target]==1;
           if(nums[i]<=target)
               include=canFindTargetSum(nums,target-nums[i],i+1,memo);
+          if(include)
+              return true;
           skip=canFindTargetSum(nums,target,i+1,memo);
           memo[i][target]=(include || skip)?1:2;
           return include || skip;
