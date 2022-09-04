@@ -1,18 +1,14 @@
 class Solution {
     public boolean canFindTargetSum(int []nums,int target){
           int n=nums.length;
-          boolean [][]dp=new boolean[n+1][target+1];
-          dp[0][0]=true;
-          for(int i=1;i<n+1;i++){
-             dp[i][0]=true; 
-             for(int j=1;j<target+1;j++){
-                 if(j>=nums[i-1])  //include & skip
-                     dp[i][j]=dp[i-1][j]||dp[i-1][j-nums[i-1]];
-                 else
-                    dp[i][j]=dp[i-1][j];//skip 
+          boolean []dp=new boolean[target+2];
+          dp[0]=true;
+          for(int val:nums){
+              for(int j=target;j>=val;j--){
+                 dp[j]=dp[j]||dp[j-val];
              } 
           }
-          return dp[n][target];
+          return dp[target];
     }
     public boolean canPartition(int[] nums) {
         int sumArr=0;
