@@ -6,10 +6,9 @@ class Solution {
           for(int i=1;i<n+1;i++){
              dp[i][0]=true; 
              for(int j=1;j<target+1;j++){
-                 if(j>=nums[i-1])
+                 if(j>=nums[i-1])  //include
                      dp[i][j]=dp[i-1][j]||dp[i-1][j-nums[i-1]];
-                 else
-                    dp[i][j]=dp[i-1][j]; 
+                 dp[i][j]=dp[i][j]||dp[i-1][j];//skip 
              } 
           }
           return dp[n][target];
