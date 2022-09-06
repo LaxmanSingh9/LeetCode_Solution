@@ -1,23 +1,18 @@
 class Solution {
-    public int lcs(String text1 ,String text2,int i,int j,int [][]memo){
-        if(i>=text1.length() || j>=text2.length())
-            return 0;
-        if(memo[i][j]!=-1)
-            return memo[i][j];
-        if(text1.charAt(i)==text2.charAt(j)){
-             memo[i][j]=1+lcs(text1,text2,i+1,j+1,memo);
+    public int lcs(char[] text1 ,char[] text2){
+        int [][]dp=new int[text1.length+1][text2.length+1];
+        for(int i=1;i<text1.length+1;i++){
+           for(int j=1;j<text2.length+1;j++){
+               if(text1[i-1]==text2[j-1])
+                   dp[i][j]=1+dp[i-1][j-1];
+               else
+                  dp[i][j]=Math.max(dp[i][j-1],dp[i-1][j]); 
+           } 
         }
-        else{
-            memo[i][j]=Math.max(lcs(text1,text2,i+1,j,memo),
-                                lcs(text1,text2,i,j+1,memo));
-        }
-        return memo[i][j];
+        return dp[text1.length][text2.length];
     }
     public int longestCommonSubsequence(String text1, String text2) {
-       int [][]memo=new int[text1.length()+1][text2.length()+1];
-       for(int []ar:memo)
-           Arrays.fill(ar,-1);
-       return lcs(text1,text2,0,0,memo); 
+       return lcs(text1.toCharArray(),text2.toCharArray()); 
         
         
       //will compare both the strings recursively if s[i]==s[j]=>(i+1,j+1)
