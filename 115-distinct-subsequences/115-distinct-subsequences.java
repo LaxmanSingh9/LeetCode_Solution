@@ -7,13 +7,9 @@ class Solution {
         int a=0,b=0,c=0;
         if(text1.charAt(i)==text2.charAt(j)){
             a=lcs(text1,text2,i+1,j+1,len+1,memo);
-            b=lcs(text1,text2,i+1,j,len,memo);
-            memo[i][j]=a+b;
         }
-        else{
-            memo[i][j]=lcs(text1,text2,i+1,j,len,memo);    
-        }
-       
+        b=lcs(text1,text2,i+1,j,len,memo);    
+        memo[i][j]=a+b;
         return memo[i][j];
     }
     public int numDistinct(String s, String t) {
