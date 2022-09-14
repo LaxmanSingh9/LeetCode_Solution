@@ -1,13 +1,9 @@
 class Solution {
-    public String isPalm(String s,int l,int r){
-       int i=l,j=r-1; 
-       while(i<=j){
-           if(s.charAt(i)!=s.charAt(j)){
-               return "";
-           }
-           i+=1;j-=1;
+    public boolean isPalm(String s,int l,int r){
+       while(l<r){
+           if(s.charAt(l++)!=s.charAt(r--))return false;
        }
-       return s.substring(l,r); 
+       return true;
     }
     public List<List<String>>ans=new ArrayList<>();
     public void solve(String s,int st,int e,List<String>list){
@@ -16,10 +12,8 @@ class Solution {
             ans.add(new ArrayList<>(list));
         }
         for(int i=st;i<e;i++){
-            String pal=isPalm(s,st,i+1);
-           //System.out.println(pal);
-            if(pal.length()>0){
-                list.add(pal);
+            if(isPalm(s,st,i)) {
+                list.add(s.substring(st,i+1));
                 solve(s,i+1,e,list);
                 list.remove(list.size()-1);
             }
