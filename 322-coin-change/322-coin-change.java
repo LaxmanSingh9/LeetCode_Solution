@@ -1,26 +1,25 @@
 class Solution {
-    public int minCoinUptoAmt(int []coins,int amt ,int idx,int [][]memo){
-        if(amt==0){
-            return 0;
+    public int minCoinUptoAmt(int []coins,int amt){
+        int [][]dp=new int[coins.length+1][amt+1];
+        int maxLimit=100000;
+        for(int i=1;i<amt+1;i++)
+            dp[0][i]=maxLimit;
+        for(int i=0;i<coins.length+1;i++)
+            dp[i][0]=0;
+        for(int i=1;i<coins.length+1;i++){
+           for(int j=1;j<amt+1;j++){
+               dp[i][j]=dp[i-1][j];
+               if(j>=coins[i-1]){
+                   dp[i][j]=Math.min(dp[i][j],1+dp[i][j-coins[i-1]]) ;
+               }
+           } 
         }
-        if(idx<0)
-            return 100000;
-        if(memo[idx][amt]!=-1)
-            return memo[idx][amt];
-        int ans1=100000,ans2=100000;
-        if(coins[idx]<=amt){
-            ans1=1+minCoinUptoAmt(coins,amt-coins[idx],idx,memo);
-        } 
-        ans2=minCoinUptoAmt(coins,amt,idx-1,memo);
-        return memo[idx][amt]=Math.min(ans1,ans2);
+        return dp[coins.length][amt]>=maxLimit?-1:dp[coins.length][amt];
      }
     
     public int coinChange(int[] coins, int amount) {
-        int [][]memo=new int[coins.length+1][amount+1];
-        for(int []ar:memo)
-            Arrays.fill(ar,-1);
-        int minCoins=minCoinUptoAmt(coins,amount,coins.length-1,memo),maxLimit=100000;
-        return minCoins>=maxLimit?-1:minCoins;
+       // Arrays.sort(coins);
+        return minCoinUptoAmt(coins,amount);
        //Sort the coins in incresng order
       //Recur reletions
         //coin>Amount skip
