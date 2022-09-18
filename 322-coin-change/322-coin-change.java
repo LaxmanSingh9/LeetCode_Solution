@@ -9,8 +9,7 @@ class Solution {
             return memo[idx][amt];
         int ans1=100000,ans2=100000;
         if(coins[idx]<=amt){
-            ans1=1+Math.min(minCoinUptoAmt(coins,amt-coins[idx],idx-1,memo),
-                            minCoinUptoAmt(coins,amt-coins[idx],idx,memo));
+            ans1=1+minCoinUptoAmt(coins,amt-coins[idx],idx,memo);
         } 
         ans2=minCoinUptoAmt(coins,amt,idx-1,memo);
         return memo[idx][amt]=Math.min(ans1,ans2);
