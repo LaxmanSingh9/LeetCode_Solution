@@ -7,8 +7,7 @@ class Solution {
             return memo[idx][amt];
         int ans1=0,ans2=0;
         if(coins[idx]<=amt){
-            ans1=Math.max(waysToUptoAmt(coins,amt-coins[idx],idx-1,memo),
-                          waysToUptoAmt(coins,amt-coins[idx],idx,memo));
+            ans1=waysToUptoAmt(coins,amt-coins[idx],idx,memo);
         }
         ans2=waysToUptoAmt(coins,amt,idx-1,memo);
         return memo[idx][amt]=ans1+ans2;
