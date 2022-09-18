@@ -1,21 +1,19 @@
 class Solution {
-    public int waysToUptoAmt(int []coins,int amt,int idx,int [][]memo){
-        if(amt==0)
-            return 1;
-        if(idx<0)return 0;
-        if(memo[idx][amt]!=-1)
-            return memo[idx][amt];
-        int ans1=0,ans2=0;
-        if(coins[idx]<=amt){
-            ans1=waysToUptoAmt(coins,amt-coins[idx],idx,memo);
-        }
-        ans2=waysToUptoAmt(coins,amt,idx-1,memo);
-        return memo[idx][amt]=ans1+ans2;
+    public int waysToUptoAmt(int []coins,int amt){
+       int [][]dp=new int[coins.length+1][amt+1];
+       dp[0][0]=1; 
+       for(int i=1;i<coins.length+1;i++){
+          dp[i][0]=1;  
+          for(int j=1;j<amt+1;j++){
+               dp[i][j]=dp[i-1][j];
+               if(j>=coins[i-1])
+                dp[i][j]=dp[i][j]+dp[i][j-coins[i-1]];   
+          } 
+       } 
+       return dp[coins.length][amt]; 
+        
     }
     public int change(int amount, int[] coins) {
-        int [][]memo=new int[coins.length+1][amount+1];
-        for(int []ar:memo)
-            Arrays.fill(ar,-1);
-        return waysToUptoAmt(coins,amount,coins.length-1,memo);
+        return waysToUptoAmt(coins,amount);
     }
 }
