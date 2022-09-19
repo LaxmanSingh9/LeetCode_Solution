@@ -4,9 +4,9 @@ class Solution{
         int []dp=new int[target+1];
         dp[0]=1;
         for(int j=1;j<target+1;j++){
-           for(int i=0;i<n;i++){
-               if(j>=nums[i])
-                  dp[j]+=dp[j-nums[i]]; 
+           for(int num:nums){
+               if(j>=num)
+                  dp[j]+=dp[j-num]; 
            } 
         }
         return dp[target];
