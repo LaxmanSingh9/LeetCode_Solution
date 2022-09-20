@@ -1,13 +1,20 @@
 class Solution {
+    public int solve(int []prices,int idx,int type,int fee,int[][]memo){
+        if(idx>=prices.length)
+            return 0;
+        if(memo[type][idx]!=-1)
+           return memo[type][idx]; 
+        int prfit1=0,prfit2=0;
+        if(type==1)
+          prfit1=Math.max(-prices[idx]+solve(prices,idx+1,0,fee,memo),solve(prices,idx+1,1,fee,memo));  
+        else
+          prfit2=Math.max(prices[idx]-fee+solve(prices,idx+1,1,fee,memo),solve(prices,idx+1,0,fee,memo));
+        return memo[type][idx]=Math.max(prfit1,prfit2);
+    }
     public int maxProfit(int[] prices, int fee) {
-        int n=prices.length, buy[]=new int[n],sell[]=new int[n];
-        buy[0]=-prices[0];
-        for(int i=1;i<n;i+=1){
-            buy[i]=Math.max(buy[i-1],sell[i-1]-prices[i]);
-            sell[i]=Math.max(sell[i-1],buy[i-1]+prices[i]-fee);
-            
-        }
-        return Math.max(sell[n-1],buy[n-1]);
-        
+       int [][]memo=new int[3][prices.length+1]; 
+       for(int []ar:memo)
+          Arrays.fill(ar,-1); 
+       return solve(prices,0,1,fee,memo); 
     }
 }
