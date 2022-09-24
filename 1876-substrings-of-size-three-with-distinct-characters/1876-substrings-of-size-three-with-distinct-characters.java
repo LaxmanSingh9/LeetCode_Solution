@@ -2,8 +2,7 @@ class Solution {
     public boolean isAllCharUnique(Map<Character,Integer>map){
         int uniq=0;
         for(char ch:map.keySet()){
-            if(map.get(ch)>0)
-               uniq+=1; 
+            if(map.get(ch)>0) uniq+=1; 
         }
         return uniq==3?true:false;
     }
@@ -16,6 +15,7 @@ class Solution {
            if(j-i+1==subLen){
                ans+=isAllCharUnique(map)?1:0;ch=s.charAt(i);
                map.put(ch,map.get(ch)-1); 
+               if(map.get(ch)==0)map.remove(ch);
                i+=1;
            }
            j+=1;
