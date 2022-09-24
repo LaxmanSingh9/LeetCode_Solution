@@ -1,6 +1,6 @@
 class Solution {
     public int isDivisorOfNum(int num,int d){
-        return d==0 || num%d!=0?0:1;
+        return d!=0 && num%d==0?1:0;
     }
     public int divisorSubstrings(int num, int k) {
        int ans=0;String s=String.valueOf(num);
