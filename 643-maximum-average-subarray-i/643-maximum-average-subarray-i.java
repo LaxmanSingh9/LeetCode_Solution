@@ -3,11 +3,11 @@ class Solution {
        double sum=0;
        for(int i=0;i<k;i++)
           sum+=nums[i];
-       double maxSum=sum; 
+       double maxAvg=sum/k; 
        for(int i=k;i<nums.length;i++){
            sum+=nums[i]-nums[i-k];
-           maxSum=Math.max(maxSum,sum);
+           maxAvg=Math.max(maxAvg,sum/k);
        } 
-       return maxSum/k; 
+       return maxAvg; 
     }
 }
