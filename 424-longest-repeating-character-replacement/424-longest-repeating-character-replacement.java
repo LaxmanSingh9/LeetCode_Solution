@@ -11,17 +11,17 @@ class Solution {
     public int characterReplacement(String s, int k) {
         if(k>=s.length())
            return s.length(); 
-        int i=0,j=0,lsr=0;
         int []map=new int[26];
-        while(j<s.length()){
+        for(int j=0;j<k;j++)
+           map[s.charAt(j)-'A']++; 
+        int i=0,lsr=0;
+        for(int j=k;j<s.length();j++) {
             map[s.charAt(j)-'A']+=1;
-            while(j-i+1>k && replaceChar(map)>k){
+            while(replaceChar(map)>k){
                 map[s.charAt(i)-'A']-=1;
                 i+=1;
             }
-            j+=1;
-            lsr=Math.max(j-i,lsr);
-          
+            lsr=Math.max(j-i+1,lsr);
         }
         return lsr;
         
