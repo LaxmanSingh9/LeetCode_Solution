@@ -10,15 +10,15 @@ class Solution {
        int []s1Freq=new int[26];
        int []s2Freq=new  int[26];
        for(char ch:s1.toCharArray())
-          s1Freq[ch-97]+=1; 
+          s1Freq[ch-'a']+=1; 
        int st=0; 
        for(int e=0;e<s2.length();e++){
            char ch=s2.charAt(e);
-           s2Freq[ch-97]+=1;
+           s2Freq[ch-'a']+=1;
            if(e-st+1==s1.length()){
                if(hasSameFreq(s1Freq,s2Freq))
                   return true;
-               s2Freq[s2.charAt(st)-97]-=1;
+               s2Freq[s2.charAt(st)-'a']-=1;
                st+=1; 
            } 
        } 
