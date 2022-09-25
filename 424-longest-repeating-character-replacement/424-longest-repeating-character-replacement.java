@@ -1,27 +1,16 @@
 class Solution {
-    public int  replaceChar(int[]dp){
-        int sum=0,max=0;
-        for(int i=0;i<dp.length;i++){
-           sum+=dp[i];
-           max=Math.max(max,dp[i]);
-        }
-        return sum-max;
-         
-    }
-    public int characterReplacement(String s, int k) {
+   public int characterReplacement(String s, int k) {
         if(k>=s.length())
            return s.length(); 
-        int []map=new int[26];
-        for(int j=0;j<k;j++)
-           map[s.charAt(j)-'A']++; 
-        int i=0,lsr=0;
-        for(int j=k;j<s.length();j++) {
-            map[s.charAt(j)-'A']+=1;
-            while(replaceChar(map)>k){
-                map[s.charAt(i)-'A']-=1;
-                i+=1;
+        int []freq=new int[26];
+        int st=0,lsr=0,maxCnt=0;
+        for(int end=0;end<s.length();end++){
+            maxCnt=Math.max(maxCnt,++freq[s.charAt(end)-'A']);
+            while(end-st+1-maxCnt>k){
+                freq[s.charAt(st)-'A']-=1;
+                st+=1;
             }
-            lsr=Math.max(j-i+1,lsr);
+            lsr=Math.max(end-st+1,lsr);
         }
         return lsr;
         
