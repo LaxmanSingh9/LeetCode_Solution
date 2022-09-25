@@ -15,7 +15,7 @@ class Solution {
         int []map=new int[26];
         while(j<s.length()){
             map[s.charAt(j)-'A']+=1;
-            while(replaceChar(map)>k){
+            while(j-i+1>k && replaceChar(map)>k){
                 map[s.charAt(i)-'A']-=1;
                 i+=1;
             }
