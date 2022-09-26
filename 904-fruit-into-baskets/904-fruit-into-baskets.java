@@ -2,7 +2,6 @@ class Solution {
     public int totalFruit(int[] fruits){
        if(fruits.length==1)
            return fruits.length;
-       int[]unqiueNess=new int[fruits.length];
        List<Integer>toDel;
        Map<Integer,Integer>map=new HashMap<>(); 
        int maxPick=0,i=0; 
