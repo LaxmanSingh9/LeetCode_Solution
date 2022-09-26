@@ -10,13 +10,12 @@ class Solution {
            if(freq.size()>2){
               while(freq.size()>2){
                  freq.put(fruits[i],freq.get(fruits[i])-1);
-                 if(freq.get(fruits[i])==0)freq.remove(fruits[i]);
+                 freq.remove(fruits[i],0);
                  i+=1;
               }
            }
            maxPick=Math.max(j-i+1,maxPick);
        }
        return maxPick; 
-        
     }
 }
