@@ -1,13 +1,14 @@
 class Solution {
-    public int longestOnes(int[] nums, int k) {
-        int ans=0,i=0,n=nums.length;
-        Queue<Integer>queue=new LinkedList<>();
-        for(int j=0;j<n;j+=1){
-           if(nums[j]==0)queue.add(j);
-           if(queue.size()==k+1)i=queue.poll()+1;
-           ans=Math.max(ans,j-i+1);
-        }
-        return ans;  
+    public int longestOnes(int[] nums, int k){
+       int[]cnt=new int[2]; 
+       int lgOneSubArr=0,st=0;
+       for(int end=0;end<nums.length;end++){
+           cnt[nums[end]]++;
+           while(cnt[0]>k){
+            cnt[nums[st]]--;st++;
+           } 
+           lgOneSubArr=Math.max(lgOneSubArr,end-st+1);
+       } 
+       return lgOneSubArr; 
     }
-        
-    }
+}
