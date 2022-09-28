@@ -1,32 +1,31 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int n1=nums1.length,n2=nums2.length;
-        double firstEle=0,secondEle=0;
-        int i=0,j=0,k=0,tot_len=n1+n2;
-        while(i<tot_len && j<n1 && k<n2){
-           while(j<n1 && k<n2 && nums1[j]>=nums2[k]){
-                if(i==(tot_len-1)/2)firstEle=nums2[k];
-                if(i==(tot_len+1)/2)secondEle=nums2[k];   
-                k++;i++;
+        if(nums1.length>nums2.length)
+            return findMedianSortedArrays(nums2,nums1);
+        int x=nums1.length,y=nums2.length;
+        int st=0,end=nums1.length;
+        while(st<=end){
+            int posX=(st+end)/2;
+            int posY=(x+y+1)/2-posX;
+            
+            int maxX=posX==x?Integer.MAX_VALUE:nums1[posX];
+            int minX=posX<=0?Integer.MIN_VALUE:nums1[posX-1];
+            //For nums2
+            int maxY=posY==y?Integer.MAX_VALUE:nums2[posY];
+            int minY=posY<=0?Integer.MIN_VALUE:nums2[posY-1];
+            
+            if(minY<=maxX && minX<=maxY){
+                 if ((x + y) % 2 == 0) {
+                    return ((double)Math.max(minX,minY) + Math.min(maxX,maxY))/2;
+                } else {
+                   return Math.max(minX,minY);
+                }
             }
-            while(j<n1&& k<n2 && nums1[j]<=nums2[k]){
-                if(i==(tot_len-1)/2)firstEle=nums1[j];
-                if(i==(tot_len+1)/2)secondEle=nums1[j];   
-                j++;i++;
-            }
-        }
-        while(j<n1){
-            if(i==(tot_len-1)/2)firstEle=nums1[j];
-            if(i==(tot_len+1)/2)secondEle=nums1[j];   
-            j++;i++;
-        } 
-        while(k<n2){
-            if(i==(tot_len-1)/2)firstEle=nums2[k];
-            if(i==(tot_len+1)/2)secondEle=nums2[k];   
-            k++;i++;
-        } 
-        return tot_len%2==1?firstEle:(firstEle+secondEle)/2;
-                   
+            else if(minX>=maxY) end=posX-1;
+            else  st=posX+1;
+       }
+       return -1; 
+        
         
     }
 }
