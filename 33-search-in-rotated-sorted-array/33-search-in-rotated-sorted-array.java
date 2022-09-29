@@ -6,7 +6,7 @@ class Solution {
         
         int num = nums[mid];
         // If nums[mid] and target are "on the same side" of nums[0], we just take nums[mid].
-        if ((nums[mid] < nums[0]) == (target < nums[0]) || (nums[mid]>=nums[0]==(target>=nums[0]))) {
+        if ((nums[mid] < nums[0]) && (target < nums[0]) || (nums[mid]>=nums[0]&&(target>=nums[0]))) {
             num = nums[mid];
         } 
         else {
